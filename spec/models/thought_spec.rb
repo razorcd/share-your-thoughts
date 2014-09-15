@@ -103,11 +103,40 @@ RSpec.describe User, :type => :model do
     before do
       @u = FactoryGirl.build(:user)          
       @t = FactoryGirl.build(:thought) 
+      @i = FactoryGirl.build(:image)
       # @u.thoughts << @t
     end
 
-    it "have images" do
-      # @t.
+    it "have images method" do
+      @t.images.should.class == Array
+      @t.images.size.should == 0
+    end
+
+    it "add new images" do
+      @t.images << @i
+      @t.images.size.should == 1
+    end
+
+    it "save/read images to db" do
+      @t.images << @i
+      @t.save.should == true
+      Thought.find(1).images.size.should == 1
+    end
+
+    it "accept multiple images" do 
+      @t.images << @i
+      @t.images << Image.new(:image_link => "image2.jpg")
+      @t.images << Image.new(:image_link => "image3.jpg")
+      @t.save.should == true     # saves 'thought' all images too
+      Thought.find(1).images.size.should == 3
+    end
+
+    it "destroys all related images on thought destroy" do
+      @t.images << @i
+      @t.save.should == true
+      Image.all.size.should > 0 # there should be an image in 'images' table
+      Thought.find(1).destroy   # destroing te only thought record
+      Image.all.size.should == 0 # image recod should be destroyed too
     end
 
   end

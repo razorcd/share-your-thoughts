@@ -1,4 +1,5 @@
 class Thought < ActiveRecord::Base
+  has_many :images, :dependent => :destroy
   before_validation :thought_strip
 
   validates :title, :presence => true,
