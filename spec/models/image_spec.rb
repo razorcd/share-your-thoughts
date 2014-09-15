@@ -29,4 +29,29 @@ RSpec.describe Image, :type => :model do
       lambda {Image.find(1)}.should raise_error
     end
   end
+
+  describe "image Validation" do
+    before do
+      @i = FactoryGirl.build(:image)
+    end
+
+    context "image_link" do
+      it "can't be blank " do
+        @i.image_link = nil
+        @i.image_link.should == nil
+        @i.save.should == false
+      end
+
+      it "can't be '' " do
+        @i.image_link = ''
+        @i.image_link.should == ''
+        @i.save.should == false
+      end
+      it "can't be longer then 128" do
+        @i.image_link = "1234567890" * 13
+        @i.image_link.size.should > 128
+        @i.save.should == false
+      end
+    end
+  end
 end
