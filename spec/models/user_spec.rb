@@ -193,5 +193,36 @@ RSpec.describe User, :type => :model do
 
   end
 
+  describe "user has thoughts(with images)" do
+    before do
+      @u = FactoryGirl.build(:user)
+      @t = FactoryGirl.build(:thought)
+      @t_strip = FactoryGirl.build(:thought_strip)
+      @i = FactoryGirl.build(:image)
+    end
+
+    it "creates a user with thought" do
+      @u.thoughts << @t
+      @t.images << @i
+      @u.save.should == true  #save
+      u = User.find(1)
+      u.should_not == nil     #user exists
+      u.thoughts.size.should == 1 #user has thoughts
+      u.thoughts[0].images.size.should == 1  #user.thoughts has images
+    end
+
+    it "destroys a user with it's thoughts and images" do
+      @u.thoughts << @t
+      @t.images << @i
+      @u.save.should == true  #save
+      u = User.find(1)        #read
+      u.should_not == nil
+      u.destroy               #destroy
+      lambda {User.find(1)}.should raise_error    #user was deleted
+      lambda {Thought.find(1)}.should raise_error #thought was deleted
+      lambda {Image.find(1)}.should raise_error   #image was deleted
+    end
+  end
+
 end
 

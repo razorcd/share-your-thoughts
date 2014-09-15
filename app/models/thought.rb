@@ -1,4 +1,5 @@
 class Thought < ActiveRecord::Base
+  belongs_to :user
   has_many :images, :dependent => :destroy
   before_validation :thought_strip
 

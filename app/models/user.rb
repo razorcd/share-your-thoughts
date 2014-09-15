@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :thoughts, :dependent => :destroy
   has_secure_password validations: false
   before_validation :strip_all
   
