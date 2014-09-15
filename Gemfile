@@ -42,4 +42,5 @@ group :development, :test do
   gem 'rspec-rails', '3.0.2'  
   gem 'watchr', '0.7'
   gem 'factory_girl_rails'
+  gem 'capybara', '2.4.1'
 end

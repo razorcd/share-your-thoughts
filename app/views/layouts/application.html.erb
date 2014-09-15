@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TwitterClone2</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <title>Share your thoughts</title>
+  <%= stylesheet_link_tag('application', :media => "all") %>
+  <%#= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%#= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <header>
+    <%= render(:partial => 'partials/header') %>
+  </header>
 
-<%= yield %>
+  <div class="content">
+    <%= yield %>
+  </div>
 
+<footer>
+  <%= render(:partial => 'partials/footer') %>
+</footer>
 </body>
 </html>
