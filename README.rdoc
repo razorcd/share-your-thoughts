@@ -1,0 +1,6 @@
+SHARE YOUT THOUGHTS - MINIBLOG
+
+TEST
+
+run 'bundle exec rspec' to run all tests
+run 'watchr watchr.script' for continuous testing
