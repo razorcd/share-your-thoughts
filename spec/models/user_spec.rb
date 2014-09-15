@@ -7,10 +7,10 @@ RSpec.describe User, :type => :model do
       @u = FactoryGirl.build(:user) 
     end
 
-    after do
-      User.all {|u| u.destroy}
-      @u = nil
-    end
+    # after do
+    #   User.all {|u| u.destroy}
+    #   @u = nil
+    # end
 
     it "has correct fields" do
       @u.full_name.should == "Full Name"
@@ -193,10 +193,5 @@ RSpec.describe User, :type => :model do
 
   end
 
-
-
-
-
 end
-
 
