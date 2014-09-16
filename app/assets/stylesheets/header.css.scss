@@ -1,0 +1,14 @@
+@import "constants";
+
+.header {
+  display: block;
+  background-color: $light-grey-color;
+  height:60px;
+  
+  .title {
+    font-size: 22pt;
+    color: $dark-grey-color;
+    padding: 12px;
+    font-weight: bold;
+  }
+}

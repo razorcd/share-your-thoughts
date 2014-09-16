@@ -1,0 +1,39 @@
+<div class="bar"></div>
+
+<!-- login form -->
+<div class="login_form">
+    <ul class="error-message">
+      <% if !@user_login then @user_login = User.new end %>
+      <% @user_login.errors.full_messages.each do |e| %>
+        <li><%= e %></li>
+      <% end %>
+  </ul>
+  <%= form_for(@user_login, :url => {:action => "login"}) do |f| %>
+    <%= f.text_field(:username, :placeholder => "username") %>
+    <%= f.password_field(:password, :placeholder => "password") %>
+    <div class="submit-box"><%= submit_tag('Login', :class => "submit_button") %></div>
+  <% end %>
+</div>
+
+
+<!-- register form -->
+<div class="register_form">
+  <div class="form-title">New here? Join us</div>
+    <ul class="error-message">
+      <% if !@user_register then @user_register = User.new end %>
+      <% @user_register.errors.full_messages.each do |e| %>
+        <li><%= e %></li>
+      <% end %>
+  </ul>
+  <%= form_for(@user_register, :url => {:action => "create"}) do |f| %>
+
+    <%= f.text_field(:full_name, :placeholder => "full name") %>
+    <%= f.text_field(:username, :placeholder => "username") %>
+    <%= f.password_field(:password, :placeholder => "password") %>
+    <%= f.password_field(:password_confirmation, :placeholder => "password confirmation") %>
+    <%= f.text_field(:email, :placeholder => "email") %>
+    <div class="submit-box"><%= submit_tag('Register', :class => "submit_button") %></div>
+  <% end %>
+</div>
+
+

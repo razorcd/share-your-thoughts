@@ -1,0 +1,6 @@
+<div class="bar"></div>
+
+<div class="show-panel">
+  <%= User.find(params[:id]).inspect %>
+  <p>Logged in as: <%= session[:username] %> , id: <%= session[:user_id] %></p>
+</div>

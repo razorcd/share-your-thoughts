@@ -1,0 +1,26 @@
+$dark-grey-color: #727272;
+$light-grey-color: #F0F0F0;
+$light-blue-color: #70D8F5;
+$very-light-blue-color: #BFF2FF;
+
+@mixin bg-gradient {
+    /* Note: This gradient may render differently in browsers that don't support the unprefixed gradient syntax */
+
+  /* IE10 Consumer Preview */ 
+  background-image: -ms-linear-gradient(bottom right, #FFFFFF 0%, #00A3EF 100%);
+
+  /* Mozilla Firefox */ 
+  background-image: -moz-linear-gradient(bottom right, #FFFFFF 0%, #00A3EF 100%);
+
+  /* Opera */ 
+  background-image: -o-linear-gradient(bottom right, #FFFFFF 0%, #00A3EF 100%);
+
+  /* Webkit (Safari/Chrome 10) */ 
+  background-image: -webkit-gradient(linear, right bottom, left top, color-stop(0, #FFFFFF), color-stop(1, #00A3EF));
+
+  /* Webkit (Chrome 11+) */ 
+  background-image: -webkit-linear-gradient(bottom right, #FFFFFF 0%, #00A3EF 100%);
+
+  /* W3C Markup, IE10 Release Preview */ 
+  background-image: linear-gradient(to top left, #FFFFFF 0%, #00A3EF 100%);
+}
