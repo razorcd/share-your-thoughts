@@ -122,6 +122,15 @@ RSpec.describe User, :type => :model do
         @u.username.size.should > 16
         @u.save.should == false
       end
+
+      it "must be unique in DB" do
+        @u.save.should == true
+        u2 = FactoryGirl.build(:user)
+        # u2 = keep same username
+        u2.email = "email2@ema.il"
+        u2.save.should == false  #username already exists
+      end
+
     end
 
     context "password" do
@@ -188,6 +197,14 @@ RSpec.describe User, :type => :model do
         @u.email = "1234567890"*6 + "@yahoo.com"
         @u.email.size.should > 64
         @u.save.should == false
+      end
+
+      it "must be unique in DB" do
+        @u.save.should == true
+        u2 = FactoryGirl.build(:user)
+        # u2 = keep same email
+        u2.username = "username2"
+        u2.save.should == false  #email already exists
       end
     end
 

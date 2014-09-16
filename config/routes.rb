@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   resources :thoughts
 
+  root "users#new"
   resources :users do
     collection do
       post 'login'
+      get 'logout'
     end
   end
 

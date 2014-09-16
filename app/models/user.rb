@@ -10,13 +10,24 @@ class User < ActiveRecord::Base
                         :length => {:within => 2 .. 128},
                         :format => {:with => /\A[a-zA-Z\s\']+\z/i}
   validates :username, :presence => true,
+                       :uniqueness => true,
                        :length => {:within => 3 .. 16},
                        :format => {:with => /\A[a-z][a-z0-9_-]+\z/i}
-  validate :password, :validate_password                      
+  validate :password, :validate_password
   validates :email, :presence => true,
+                    :uniqueness => true,
                     :length => {:within => 2 .. 64},
                     :format => {:with => /\A[_a-zA-Z0-9]([\-+_%.a-zA-Z0-9]+)?@([_+\-%a-zA-Z0-9]+)(\.[a-zA-Z0-9]{0,6}){1,2}([a-zA-Z0-9]\z)/i}
 
+
+  
+
+  #crear password fields to not send it back to view (security reason)
+  def clear_password_fields
+      self.password.clear if self.password
+      self.password_confirmation.clear if self.password_confirmation
+      self.password_digest.clear if self.password_digest
+  end
 
   private 
 
