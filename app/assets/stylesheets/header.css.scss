@@ -10,5 +10,30 @@
     color: $dark-grey-color;
     padding: 12px;
     font-weight: bold;
+    width: 300px;
   }
+
+  .user-info {
+    float:right;
+    margin:10px;
+    margin-top: 30px;
+
+    span {
+      margin:10px;
+    }
+    .username {
+      color: #000000;
+    }
+
+    .logout-but {
+      text-decoration: none;
+      color:$dark-grey-color;
+      &:hover {
+        color: $light-blue-color;  
+      }
+    }
+
+  }
+
 }
+
