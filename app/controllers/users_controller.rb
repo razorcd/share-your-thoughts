@@ -28,7 +28,7 @@ class UsersController < ApplicationController
       redirect_to @user
     else
       @user.clear_password_fields if @user
-      render "new"
+      redirect_to root_path, :notice => "Wrong username/password"
     end
   end
 

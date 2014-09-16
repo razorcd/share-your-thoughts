@@ -2,12 +2,10 @@
 
 <!-- login form -->
 <div class="login_form">
+    <% if !@user_login then @user_login = User.new end %>
     <ul class="error-message">
-      <% if !@user_login then @user_login = User.new end %>
-      <% @user_login.errors.full_messages.each do |e| %>
-        <li><%= e %></li>
-      <% end %>
-  </ul>
+        <li><%= notice %></li>
+    </ul>
   <%= form_for(@user_login, :url => {:action => "login"}) do |f| %>
     <%= f.text_field(:username, :placeholder => "username") %>
     <%= f.password_field(:password, :placeholder => "password") %>
@@ -19,8 +17,8 @@
 <!-- register form -->
 <div class="register_form">
   <div class="form-title">New here? Join us</div>
+    <% if !@user_register then @user_register = User.new end %>
     <ul class="error-message">
-      <% if !@user_register then @user_register = User.new end %>
       <% @user_register.errors.full_messages.each do |e| %>
         <li><%= e %></li>
       <% end %>
