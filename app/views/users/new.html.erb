@@ -2,7 +2,7 @@
 
 <!-- login form -->
 <div class="login_form">
-    <% if !@user_login then @user_login = User.new end %>
+    <% @user_login ||= User.new %>
     <ul class="error-message">
         <li><%= notice %></li>
     </ul>
@@ -18,7 +18,7 @@
 <!-- register form -->
 <div class="register_form">
   <div class="form-title">New here? Join us</div>
-    <% if !@user_register then @user_register = User.new end %>
+    <% @user_register ||= User.new %>
     <ul class="error-message">
       <% @user_register.errors.full_messages.each do |e| %>
         <li><%= e %></li>

@@ -67,9 +67,6 @@ describe "Create Thoughts Form" do
         page.body.should have_content(thought.body)    #showing the shared thought
       end
     end
-
-
-
   end
 
 end

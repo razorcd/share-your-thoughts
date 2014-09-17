@@ -1,46 +1,58 @@
 <% @thought ||= Thought.new %>
 <% @user ||= User.find(session[:user_id]) %>
+
 <div class="bar"></div>
 <% if @user.email_confirmed == false %>
   <div class="message"> Please confirm your email so in case you forget your password we can send you a new one.</div>
 <% end %>
 
 <div class="show-panel">
-  <%= User.find(session[:user_id]).inspect %>
-  <p>Logged in as: <%= session[:username] %> , id: <%= session[:user_id] %></p>
+<!--   <%#= User.find(session[:user_id]).inspect %>
+  <p>Logged in as: <%#= session[:username] %> , id: <%#= session[:user_id] %></p>
 
   <p> <%= @user.thoughts.inspect %></p>
 
 
 
-  
-
-<div class="thought_form">
-  <div class="form-title">Hounted by a new thought?</div>
-    <ul class="error-message">
-      <% @thought.errors.full_messages.each do |e| %>
-        <li><%= e %></li>
+   -->
+  <!-- Create Thoughts Form -->
+  <div class="thought_form">
+    <div class="form-title">Hounted by a new thought?</div>
+      <ul class="error-message">
+        <% @thought.errors.full_messages.each do |e| %>
+          <li><%= e %></li>
+        <% end %>
+    </ul>
+    <%= form_for(@thought, :url => {:controller => "thoughts", :action => "create"}) do |f| %>
+        <%= f.text_field(:title, :placeholder => "Title") %>
+        <%= f.text_area(:body, :placeholder => "enter your thought here") %>
+        <label class="checkbox"> <span>SHOUT?</span> <%= f.check_box(:shout?, :title => "It will display the thought in bold") %> </label>
+        <div class="submit-box"><%= submit_tag('Share it', :class => "submit_button") %></div>
       <% end %>
-  </ul>
-  <%= form_for(@thought, :url => {:controller => "thoughts", :action => "create"}) do |f| %>
-      <%= f.text_field(:title, :placeholder => "Title") %>
-      <%= f.text_area(:body, :placeholder => "enter your thought here") %>
-      <label class="checkbox"> <span>SHOUT?</span> <%= f.check_box(:shout?, :title => "It will display the thought in bold") %> </label>
-      <div class="submit-box"><%= submit_tag('Share it', :class => "submit_button") %></div>
-    <% end %>
-    <div style="clear:both"></div>
-</div>
-
-
-
-
-
-
-
-  <div class="thoughts-list">
-    <p>Title: </p>
-    <p>Body: </p>
+      <div style="clear:both"></div>
   </div>
+
+
+  <!-- Thoughts List -->
+  <% if @user.thoughts.size > 0 %>
+    <div class="thoughts_list">
+    
+      <div class="main-title"> Your thoughts </div>
+      <% @user.thoughts.each do |t| %>
+        <div class="thought-item">
+          <!-- shout -->
+          <div class="title"> <%= t.title %> </div>
+          <div class="body">  <%= t.body  %> </div>
+          <div class="name-time"> by <%= @user.full_name %>  on <%= t.created_at.strftime("%Y-%m-%d") %> at <%= t.created_at.strftime("%H:%M") %></div>
+        </div>
+      <% end %>
+
+    </div>  
+  <% end %>
+
+
+
+
 
 
 </div>

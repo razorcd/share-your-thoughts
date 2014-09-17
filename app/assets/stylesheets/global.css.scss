@@ -14,7 +14,7 @@ body, header, footer, .content {
 }
 
 .message {
-  background-color: $light-grey-color;
+  background-color: #ffffff;
   height: 18px;
   margin: 5px 20px 20px 20px;
   padding: 5px 15px;
@@ -22,6 +22,7 @@ body, header, footer, .content {
 
 .content {
   min-height: 800px;
+  padding: 0 30px 20px 30px;
   /*background-color: #FFFFFF;*/
   @include bg-gradient ;
 }
@@ -112,6 +113,49 @@ body, header, footer, .content {
       background-color: $light-blue-color;
       color: #ffffff;
       cursor: pointer;
+    }
+  }
+}
+
+.thought_form {
+  float: right;
+}
+
+.thoughts_list {
+  float: left;
+  display: block;
+  border: 1px solid $light-grey-color;
+  width: 600px;
+  min-height: 50px;
+  margin: 10px auto;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 2px 2px 15px $dark-grey-color;
+
+  .main-title {
+    height: 10px;
+    border-bottom: 1px solid $light-grey-color;
+    padding: 15px;
+  }
+
+  .thought-item:not(:last-child) {
+    border-bottom: 1px solid $light-grey-color;
+  }
+
+  .thought-item {
+    padding: 15px;
+
+    .title {
+      font-weight: bold;
+      font-size: 14pt;
+      margin: 10px;
+    }
+    .body {
+      margin: 10px;
+    }
+    .name-time {
+      text-align: right;
+      font-size: 10pt;
     }
   }
 }
