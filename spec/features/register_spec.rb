@@ -170,12 +170,12 @@ describe "fill Register Form" do
     end
 
     it "should render show view" do
-      current_path.should == "/users/1"
+      current_path.should == "/users/1/thoughts"
     end
 
     it "should be Logged In after registering" do
-      visit "/users/1"
-      current_path.should == "/users/1"
+      visit "/users/1/thoughts"
+      current_path.should == "/users/1/thoughts"
     end
 
     context "username, email already exists in DB" do

@@ -1,0 +1,47 @@
+<% @thought ||= Thought.new %>
+<div class="bar"></div>
+<% if @user.email_confirmed == false %>
+  <div class="message"> Please confirm your email so we can reset your password in case you forget it.</div>
+<% end %>
+
+<div class="show-panel">
+  <%= User.find(session[:user_id]).inspect %>
+  <p>Logged in as: <%= session[:username] %> , id: <%= session[:user_id] %></p>
+
+  <p> <%= @user.thoughts.inspect %></p>
+
+
+
+  
+
+<div class="thought_form">
+  <div class="form-title">Hounted by a new thought?</div>
+    <ul class="error-message">
+      <% if flash[:thought_errors] %>
+        <% flash[:thought_errors].each do |e| %>
+          <li><%= e %></li>
+        <% end %>
+      <% end %>
+  </ul>
+  <%= form_for(@thought, :url => {:controller => "thoughts", :action => "create"}) do |f| %>
+      <%= f.text_field(:title, :placeholder => "Title") %>
+      <%= f.text_area(:body, :placeholder => "enter your thought here") %>
+      <label class="checkbox"> <span>SHOUT?</span> <%= f.check_box(:shout?, :title => "It will display the thought in bold") %> </label>
+      <div class="submit-box"><%= submit_tag('Share it', :class => "submit_button") %></div>
+    <% end %>
+    <div style="clear:both"></div>
+</div>
+
+
+
+
+
+
+
+  <div class="thoughts-list">
+    <p>Title: </p>
+    <p>Body: </p>
+  </div>
+
+
+</div>

@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  resources :thoughts
-
+  
   root "users#new"
+  
   resources :users do
+    resources :thoughts
     collection do
       post 'login'
       get 'logout'

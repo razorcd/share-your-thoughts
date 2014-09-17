@@ -10,7 +10,14 @@ body, header, footer, .content {
 }
 
 .bar {
-  height:10px;
+  height:5px;
+}
+
+.message {
+  background-color: $light-grey-color;
+  height: 18px;
+  margin: 5px 20px 20px 20px;
+  padding: 5px 15px;
 }
 
 .content {
@@ -21,7 +28,7 @@ body, header, footer, .content {
 
 
 /*register form*/
-.register_form, .login_form {
+.register_form, .login_form, .thought_form {
   display: block;
   border: 1px solid $light-grey-color;
   width: 230px;
@@ -56,7 +63,7 @@ body, header, footer, .content {
     width: 212px;
   }
 
-  input {
+  input,textarea {
     color: $dark-grey-color;
     display: block;
     margin: 5px auto;
@@ -75,8 +82,28 @@ body, header, footer, .content {
     }
   }
 
+  textarea {
+    height: 250px;
+    max-width: 197px;
+  }
+
+  .checkbox {
+    margin: 0px 20px;
+    float: right;
+    span {
+      position: relative;
+      top:-7px;
+    }
+    input {
+      display: inline;
+      box-shadow: none;
+    }
+  }
+
   .submit_button {
     float:right;
+    clear:both;
+    margin-bottom: 12px;
     padding: 0 10px;
     height:35px;
     color: $dark-grey-color;

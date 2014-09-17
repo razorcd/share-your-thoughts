@@ -4,7 +4,7 @@ class Thought < ActiveRecord::Base
   before_validation :thought_strip
 
   validates :title, :presence => true,
-                    :length => {:within => 1..64}
+                    :length => {:within => 0..64}
 
   validates :body, :presence => true
                    # :length{:within => 1..512}

@@ -11,21 +11,19 @@ class UsersController < ApplicationController
 
     if @user_register.save
       login_user(@user_register)
-      redirect_to @user_register
+      redirect_to user_thoughts_path(@user_register.id)
     else
       @user_register.clear_password_fields
       render "new"
     end
   end
 
-  def show
-  end
 
   def login
     @user = User.where(:username => user_permits[:username]).first
     if @user && @user.authenticate(user_permits[:password]) 
       login_user(@user)
-      redirect_to @user
+      redirect_to user_thoughts_path(@user.id)
     else
       @user.clear_password_fields if @user
       redirect_to root_path, :notice => "Wrong username/password"

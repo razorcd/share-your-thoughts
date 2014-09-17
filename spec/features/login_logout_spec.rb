@@ -19,7 +19,7 @@ describe "fill Register Form" do
       page.body.should have_button('Login')
       click_button('Login')
 
-      current_path.should == "/users/1"
+      current_path.should == "/users/1/thoughts"
       page.body.should have_link('Logout')
     end
   end
@@ -51,24 +51,24 @@ describe "fill Register Form" do
       click_button('Login')
     end
     it "should logout visiting '/users/logout' path"  do
-      current_path.should == "/users/1"   #should be logged in
-      visit "/users/1"                    #visiting restricted access page
-      current_path.should == "/users/1"   #should stay logged in
-      visit "/users/logout"               #loggin out
-      current_path.should == "/"          #should redirect to path
-      visit "/users/1"                    #visiting restricted access page
-      current_path.should == "/"          #should redirect to path when not logged in
+      current_path.should == "/users/1/thoughts"   #should be logged in
+      visit "/users/1/thoughts"                    #visiting restricted access page
+      current_path.should == "/users/1/thoughts"   #should stay logged in
+      visit "/users/logout"                        #loggin out
+      current_path.should == "/"                   #should redirect to path
+      visit "/users/1/thoughts"                    #visiting restricted access page
+      current_path.should == "/"                   #should redirect to path when not logged in
     end
 
     it "should logout clicking Logout button"  do
       page.body.should have_link('Logout')
-      current_path.should == "/users/1"   #should be logged in
-      visit "/users/1"                    #visiting restricted access page
-      current_path.should == "/users/1"   #should stay logged in
-      click_link('Logout')               #loggin out
-      current_path.should == "/"          #should redirect to path
-      visit "/users/1"                    #visiting restricted access page
-      current_path.should == "/"          #should redirect to path when not logged in
+      current_path.should == "/users/1/thoughts"   #should be logged in
+      visit "/users/1/thoughts"                    #visiting restricted access page
+      current_path.should == "/users/1/thoughts"   #should stay logged in
+      click_link('Logout')                         #loggin out
+      current_path.should == "/"                   #should redirect to path
+      visit "/users/1/thoughts"                    #visiting restricted access page
+      current_path.should == "/"                   #should redirect to path when not logged in
     end
   end
 
