@@ -3,7 +3,7 @@ class CreateThoughts < ActiveRecord::Migration
     create_table :thoughts do |t|
       t.string :title, :limit => 64
       t.text :body
-      t.boolean :shout?, :default => false
+      t.boolean :shout, :default => false
       t.integer :user_id
       t.timestamps
     end

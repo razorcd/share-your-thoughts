@@ -1,7 +1,8 @@
 <% @thought ||= Thought.new %>
+<% @user ||= User.find(session[:user_id]) %>
 <div class="bar"></div>
 <% if @user.email_confirmed == false %>
-  <div class="message"> Please confirm your email so we can reset your password in case you forget it.</div>
+  <div class="message"> Please confirm your email so in case you forget your password we can send you a new one.</div>
 <% end %>
 
 <div class="show-panel">
@@ -17,10 +18,8 @@
 <div class="thought_form">
   <div class="form-title">Hounted by a new thought?</div>
     <ul class="error-message">
-      <% if flash[:thought_errors] %>
-        <% flash[:thought_errors].each do |e| %>
-          <li><%= e %></li>
-        <% end %>
+      <% @thought.errors.full_messages.each do |e| %>
+        <li><%= e %></li>
       <% end %>
   </ul>
   <%= form_for(@thought, :url => {:controller => "thoughts", :action => "create"}) do |f| %>

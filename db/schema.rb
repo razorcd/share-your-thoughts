@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20140914200702) do
   create_table "thoughts", force: true do |t|
     t.string   "title",      limit: 64
     t.text     "body"
-    t.boolean  "shout?",                default: false
+    t.boolean  "shout",                 default: false
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -7,7 +7,7 @@ describe "show user page (after login)" do
   before do
     visit root_path  #or new_user_path???
 
-    #fill in with correct details
+    #fill in with correct details and LOGIN
     within '.login_form form' do
       fill_in('user_username', :with => user.username)
       fill_in('user_password', :with => user.password)

@@ -8,7 +8,8 @@ class Thought < ActiveRecord::Base
 
   validates :body, :presence => true
                    # :length{:within => 1..512}
-
+  validates :shout, :presence => false
+  
   private
 
   def thought_strip
