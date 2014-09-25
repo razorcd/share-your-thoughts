@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :check_login, :except => [:new, :create, :login]
 
   def new
-
+    if loggedin? then redirect_to user_thoughts_path(session[:user_id]) end
   end
 
   #POST Register Form
@@ -53,6 +53,12 @@ class UsersController < ApplicationController
     if session[:user_id] then return true end
     logout_user
     redirect_to root_path
+  end
+
+  def loggedin?
+    if session[:user_id] then return true
+    else return false
+    end
   end
 
   def logout_user
