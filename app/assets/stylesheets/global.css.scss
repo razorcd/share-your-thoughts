@@ -33,7 +33,9 @@ body, header, footer, .content {
   display: block;
   border: 1px solid $light-grey-color;
   width: 230px;
-  margin: 10px auto;
+  /*margin: 10px auto;*/
+  margin: 10px;
+  float:right;
   border-radius: 10px;
   background-color: #ffffff;
   box-shadow: 2px 2px 15px $dark-grey-color;

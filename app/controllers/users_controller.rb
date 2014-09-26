@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def new
     # if loggedin? then redirect_to user_thoughts_path(session[:user_id]) end
+    @allthoughts = Thought.all.sort {|x,y| x.created_at <=> y.created_at}.reverse
   end
 
   #POST Register Form
@@ -14,7 +15,9 @@ class UsersController < ApplicationController
       redirect_to user_thoughts_path(@user_register.id)
     else
       @user_register.clear_password_fields
-      render "new"
+      flash[:register_error] = @user_register.errors.full_messages 
+      redirect_to root_path
+      # render "new"
     end
   end
 

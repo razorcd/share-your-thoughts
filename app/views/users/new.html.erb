@@ -1,39 +1,63 @@
 <div class="bar"></div>
 
-<!-- login form -->
-<div class="login_form">
-    <% @user_login ||= User.new %>
-    <ul class="error-message">
-        <li><%= notice %></li>
-    </ul>
-  <%= form_for(@user_login, :url => {:action => "login"}) do |f| %>
-    <%= f.text_field(:username, :placeholder => "username") %>
-    <%= f.password_field(:password, :placeholder => "password") %>
-    <div class="submit-box"><%= submit_tag('Login', :class => "submit_button") %></div>
-  <% end %>
-  <div style="clear:both"></div>
-</div>
+<!-- Thoughts List -->
+<% if @allthoughts.size > 0 %>
+  <div class="thoughts_list">
+    <div class="main-title"> All thoughts </div>
+    <% @allthoughts.each do |t| %>
+      <div class="thought-item">
+        <!-- shout -->
+        <div class="title"> <%= t.title %> </div>
+        <div class="body">  <%= t.body  %> </div>
+        <div class="name-time"> by <%= t.user.full_name %>  on <%= t.created_at.strftime("%Y-%m-%d") %> at <%= t.created_at.strftime("%H:%M") %></div>
+      </div>
+    <% end %>
+
+  </div>  
+<% end %>
 
 
-<!-- register form -->
-<div class="register_form">
-  <div class="form-title">New here? Join us</div>
-    <% @user_register ||= User.new %>
-    <ul class="error-message">
-      <% @user_register.errors.full_messages.each do |e| %>
-        <li><%= e %></li>
+
+
+<% if !session[:user_id] %>
+  <!-- login form -->
+  <div class="login_form">
+      <% @user_login ||= User.new %>
+      <ul class="error-message">
+          <li><%= notice %></li>
+      </ul>
+      <%= form_for(@user_login, :url => {:action => "login"}) do |f| %>
+        <%= f.text_field(:username, :placeholder => "username") %>
+        <%= f.password_field(:password, :placeholder => "password") %>
+        <div class="submit-box"><%= submit_tag('Login', :class => "submit_button") %></div>
       <% end %>
-  </ul>
-  <%= form_for(@user_register, :url => {:action => "create"}) do |f| %>
+    <div style="clear:both"></div>
+  </div>
+<% end %>
 
-    <%= f.text_field(:full_name, :placeholder => "full name") %>
-    <%= f.text_field(:username, :placeholder => "username") %>
-    <%= f.password_field(:password, :placeholder => "password") %>
-    <%= f.password_field(:password_confirmation, :placeholder => "password confirmation") %>
-    <%= f.text_field(:email, :placeholder => "email") %>
-    <div class="submit-box"><%= submit_tag('Register', :class => "submit_button") %></div>
-  <% end %>
-  <div style="clear:both"></div>
-</div>
 
+<% if !session[:user_id] %>
+  <!-- register form -->
+  <div class="register_form">
+    <div class="form-title">New here? Join us</div>
+      <% @user_register ||= User.new %>
+      <ul class="error-message">
+        <% if flash[:register_error] %>
+        <% flash[:register_error].each do |e| %>
+          <li><%= e %></li>
+        <% end %>
+        <% end %>
+      </ul>
+      <%= form_for(@user_register, :url => {:action => "create"}) do |f| %>
+
+        <%= f.text_field(:full_name, :placeholder => "full name") %>
+        <%= f.text_field(:username, :placeholder => "username") %>
+        <%= f.password_field(:password, :placeholder => "password") %>
+        <%= f.password_field(:password_confirmation, :placeholder => "password confirmation") %>
+        <%= f.text_field(:email, :placeholder => "email") %>
+        <div class="submit-box"><%= submit_tag('Register', :class => "submit_button") %></div>
+      <% end %>
+    <div style="clear:both"></div>
+  </div>
+<% end %>
 
