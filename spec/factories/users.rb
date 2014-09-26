@@ -26,4 +26,12 @@ FactoryGirl.define do
     email "email@ema.il"
   end
 
+  factory :user2, :class => User do
+    full_name "Full Seondname"
+    username  "username2"
+    password  "password2"
+    password_confirmation  "password2"
+    avatar  "/avatarts/username_av1.jpg"
+    email "email2@ema.il"
+  end
 end

@@ -1,0 +1,17 @@
+<div class="bar"></div>
+
+<!-- Users List -->
+<% if @users.size > 0 %>
+  <div class="thoughts_list">
+    <div class="main-title"> All users </div>
+    <% @users.each do |t| %>
+      <div class="thought-item">
+        <!-- shout -->
+        <div class="title"> <%= t.full_name %> </div>
+        <div class="body">  <%= t.username  %> </div>
+        <div class="name-time"> registred on <%= t.created_at.strftime("%Y-%m-%d") %> at <%= t.created_at.strftime("%H:%M") %></div>
+      </div>
+    <% end %>
+
+  </div>  
+<% end %>

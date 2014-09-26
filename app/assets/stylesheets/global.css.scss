@@ -137,7 +137,7 @@ body, header, footer, .content {
   float: right;
 }
 
-.thoughts_list {
+.thoughts_list, .users_list {
   float: left;
   display: block;
   border: 1px solid $light-grey-color;

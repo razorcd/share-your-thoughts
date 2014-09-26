@@ -3,6 +3,7 @@ require 'rails_helper'
 #testing LOGIN form from root path
 describe "fill Register Form" do
   let(:user) {FactoryGirl.create(:user)}
+  let(:user2) {FactoryGirl.create(:user2)}
   # subject {user}
   before do 
     visit root_path  #or new_user_path???
@@ -23,6 +24,7 @@ describe "fill Register Form" do
       page.body.should have_link('Logout')
     end
 
+
     # it "should redirect from root to user_path" do 
     #   #logging in
     #   page.body.should have_button('Login')
@@ -32,14 +34,45 @@ describe "fill Register Form" do
     #   current_path.should be == "/users/1/thoughts"
     # end
 
-    it "should redirect if trying to access other users page" do
-      #logging in
-      page.body.should have_button('Login')
-      click_button('Login')
+    # it "should redirect if trying to access other users page" do
+    #   #logging in
+    #   page.body.should have_button('Login')
+    #   click_button('Login')
 
-      visit "/users/3/thoughts"
-      current_path.should be == "/users/1/thoughts"
+    #   visit "/users/3/thoughts"
+    #   current_path.should be == "/users/1/thoughts"
+    # end
+    context "root page" do
+      it "should not have login and register forms" do
+        page.body.should have_button('Login')
+        click_button('Login')
+
+        visit root_path
+        page.body.should_not have_button('Login')
+        page.body.should_not have_button('Register')
+      end
     end
+
+    context "other users page" do
+      it "should not have 'thought creating' form" do
+        page.body.should have_button('Login')
+        click_button('Login')
+        user2 #creates user2 in db
+
+        visit user_thoughts_path(user2.id)
+        page.body.should_not have_css('.thought_form')
+        page.body.should_not have_button('Share it')
+      end
+
+      it "should not have 'confirm email' text" do
+        page.body.should have_button('Login')
+        click_button('Login')
+
+        visit user_thoughts_path(user2.id)
+        page.body.should_not have_content('Please confirm your email')
+      end
+    end
+
 
   end
 
@@ -75,8 +108,6 @@ describe "fill Register Form" do
       current_path.should be == "/users/1/thoughts"   #should stay logged in
       visit "/users/logout"                        #loggin out
       current_path.should be == "/"                   #should redirect to path
-      visit "/users/1/thoughts"                    #visiting restricted access page
-      current_path.should be == "/"                   #should redirect to path when not logged in
     end
 
     it "should logout clicking Logout button"  do
@@ -86,8 +117,6 @@ describe "fill Register Form" do
       current_path.should be == "/users/1/thoughts"   #should stay logged in
       click_link('Logout')                         #loggin out
       current_path.should be == "/"                   #should redirect to path
-      visit "/users/1/thoughts"                    #visiting restricted access page
-      current_path.should be == "/"                   #should redirect to path when not logged in
     end
   end
 

@@ -1,7 +1,7 @@
 require_relative "concerns/controller_helpers.rb"
 
 class ThoughtsController < ApplicationController
-  before_action :check_login, :check_current_user
+  before_action :check_login, :check_current_user, :except => [:index]
 
   def create
     @thought = Thought.new(thought_permits)
@@ -21,7 +21,7 @@ class ThoughtsController < ApplicationController
   private
 
   include CONTROLLER_HELPERS
-  
+
   def thought_permits
     params.require(:thought).permit(:title, :body, :shout)
   end

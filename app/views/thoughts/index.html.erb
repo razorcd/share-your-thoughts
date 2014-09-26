@@ -1,43 +1,59 @@
 <% @thought ||= Thought.new %>
-<% @user ||= User.find(session[:user_id]) %>
+<% @user ||= User.find(params[:user_id]) if params[:user_id]%>
 
-<div class="bar"></div>
-<% if @user.email_confirmed == false %>
-  <div class="message"> Please confirm your email so in case you forget your password we can send you a new one.</div>
+<% if session[:user_id].to_s == params[:user_id].to_s %>
+  <div class="bar"></div>
+  <% if @user.email_confirmed == false %>
+    <div class="message"> Please confirm your email so in case you forget your password we can send you a new one.</div>
+  <% end %>
 <% end %>
 
 <div class="show-panel">
 <!--   <%#= User.find(session[:user_id]).inspect %>
   <p>Logged in as: <%#= session[:username] %> , id: <%#= session[:user_id] %></p>
 
-  <p> <%= @user.thoughts.inspect %></p>
-
-
-
+  <p> <%#= @user.thoughts.inspect %></p>
    -->
-  <!-- Create Thoughts Form -->
-  <div class="thought_form">
-    <div class="form-title">Hounted by a new thought?</div>
-      <ul class="error-message">
-        <% @thought.errors.full_messages.each do |e| %>
-          <li><%= e %></li>
+
+  <!-- create thought form -->
+  <% if session[:user_id].to_s == params[:user_id].to_s %>
+    <!-- Create Thoughts Form -->
+    <div class="thought_form">
+      <div class="form-title">Hounted by a new thought?</div>
+        <ul class="error-message">
+          <% @thought.errors.full_messages.each do |e| %>
+            <li><%= e %></li>
+          <% end %>
+      </ul>
+      <%= form_for(@thought, :url => {:controller => "thoughts", :action => "create"}) do |f| %>
+          <%= f.text_field(:title, :placeholder => "Title") %>
+          <%= f.text_area(:body, :placeholder => "enter your thought here") %>
+          <label class="checkbox"> <span>SHOUT?</span> <%= f.check_box(:shout?, :title => "It will display the thought in bold") %> </label>
+          <div class="submit-box"><%= submit_tag('Share it', :class => "submit_button") %></div>
         <% end %>
-    </ul>
-    <%= form_for(@thought, :url => {:controller => "thoughts", :action => "create"}) do |f| %>
-        <%= f.text_field(:title, :placeholder => "Title") %>
-        <%= f.text_area(:body, :placeholder => "enter your thought here") %>
-        <label class="checkbox"> <span>SHOUT?</span> <%= f.check_box(:shout?, :title => "It will display the thought in bold") %> </label>
-        <div class="submit-box"><%= submit_tag('Share it', :class => "submit_button") %></div>
-      <% end %>
-      <div style="clear:both"></div>
-  </div>
+        <div style="clear:both"></div>
+    </div>
+  <% end %>
+
+
+  <!-- Users List -->
+    <div class="users_list">
+      <div class="main-title"> User </div>
+        <div class="thought-item">
+          <!-- shout -->
+          <div class="title"> <%= @user.full_name %> </div>
+          <div class="body">  <%= @user.username  %> </div>
+          <div class="name-time"> registred on <%=  @user.created_at.strftime("%Y-%m-%d") %> at <%=  @user.created_at.strftime("%H:%M") %></div>
+        </div>
+    </div>  
+
 
 
   <!-- Thoughts List -->
   <% if @user.thoughts.size > 0 %>
     <div class="thoughts_list">
     
-      <div class="main-title"> Your thoughts </div>
+      <div class="main-title"> <%= @user.full_name %>'s thoughts </div>
       <% @user.thoughts.each do |t| %>
         <div class="thought-item">
           <!-- shout -->

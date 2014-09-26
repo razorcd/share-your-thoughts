@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
-  before_action :check_login, :except => [:new, :create, :login]
+  before_action :check_login, :except => [:new, :create, :login, :index]
+
+  def index
+    @users = User.all
+  end
 
   def new
     # if loggedin? then redirect_to user_thoughts_path(session[:user_id]) end
