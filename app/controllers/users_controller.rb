@@ -41,18 +41,20 @@ class UsersController < ApplicationController
 
   def update
     @current_user = User.find(session[:user_id])
-    if @current_user && @current_user.authenticate(user_permits[:password])
+    if @current_user
       @current_user.full_name = user_permits[:full_name]
       @current_user.username = user_permits[:username]
       @current_user.email = user_permits[:email]
-      #TODO: add email_confiemed = false  ? to confirm email again
-      @current_user.save #will add the error messages if save failed to @current_user.errors.full_messages
-    else
-      @current_user.errors[:password] << "Wrong password"
+      if @current_user.authenticate(user_permits[:password]) 
+        #TODO: add email_confiemed = false  ? to confirm email again
+        @current_user.save  #will add the error messages if save failed to @current_user.errors.full_messages
+      else
+        @current_user.errors[:password] << "is wrong"
+      end
     end
     flash[:edit_user_errors] = @current_user.errors.full_messages
-    redirect_to edit_user_path(session[:user_id])
-    # render "edit"
+    #redirect_to edit_user_path(session[:user_id])
+    render "edit"
   end
 
   private

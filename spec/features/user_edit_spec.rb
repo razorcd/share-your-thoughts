@@ -27,4 +27,49 @@ describe "user edit page" do
     find('.user_form').find_field('user[password]').value.should == nil #""
     find('.user_form').should have_button('Save')
   end
+
+  it "should update User" do
+    current_path.should == "/users/1/edit"
+    find('.user_form').fill_in('user[full_name]', :with => "NewFullName")
+    find('.user_form').fill_in('user[username]', :with => "username222")
+    find('.user_form').fill_in('user[email]', :with => "email222@ema.il")
+    find('.user_form').fill_in('user[password]', :with => "password")
+    click_button('Save')
+    
+    current_path.should == "/users/1"  #should redirect to same address
+    find('.user_form').find_field('user[full_name]').value.should == "NewFullName"
+    find('.user_form').find_field('user[username]').value.should == "username222"
+    find('.user_form').find_field('user[email]').value.should == "email222@ema.il"
+    find('.user_form').find_field('user[password]').value.should == nil #""
+  end
+
+  it "should give wrong password errors" do
+    current_path.should == "/users/1/edit"
+    find('.user_form').fill_in('user[full_name]', :with => "NewFullName")
+    find('.user_form').fill_in('user[username]', :with => "username222")
+    find('.user_form').fill_in('user[email]', :with => "email222@ema.il")
+    find('.user_form').fill_in('user[password]', :with => "fsf")
+    click_button('Save')
+    
+    current_path.should == "/users/1"  #should redirect to same address
+    find('.user_form').find('.error-message').should have_content("Password is wrong")
+    find('.user_form').find_field('user[full_name]').value.should == "NewFullName"
+    find('.user_form').find_field('user[username]').value.should == "username222"
+    find('.user_form').find_field('user[email]').value.should == "email222@ema.il"
+    find('.user_form').find_field('user[password]').value.should == nil #""
+  end
+
+  it "should give validation errors errors" do
+    current_path.should == "/users/1/edit"
+    find('.user_form').fill_in('user[full_name]', :with => "")
+    find('.user_form').fill_in('user[username]', :with => "")
+    find('.user_form').fill_in('user[email]', :with => "")
+    find('.user_form').fill_in('user[password]', :with => "password")
+    click_button('Save')
+    
+    current_path.should == "/users/1"  #should redirect to same address
+    find('.user_form').find('.error-message').should have_content("Full name can't be blank")
+    find('.user_form').find('.error-message').should have_content("Username is invalid")
+    find('.user_form').find('.error-message').should have_content("Email is invalid")
+  end
 end
