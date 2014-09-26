@@ -23,14 +23,14 @@ describe "fill Register Form" do
       page.body.should have_link('Logout')
     end
 
-    it "should redirect from root to user_path" do 
-      #logging in
-      page.body.should have_button('Login')
-      click_button('Login')
+    # it "should redirect from root to user_path" do 
+    #   #logging in
+    #   page.body.should have_button('Login')
+    #   click_button('Login')
 
-      visit root_path
-      current_path.should be == "/users/1/thoughts"
-    end
+    #   visit root_path
+    #   current_path.should be == "/users/1/thoughts"
+    # end
 
     it "should redirect if trying to access other users page" do
       #logging in

@@ -1,3 +1,5 @@
+require_relative "concerns/controller_helpers.rb"
+
 class ThoughtsController < ApplicationController
   before_action :check_login, :check_current_user
 
@@ -18,23 +20,10 @@ class ThoughtsController < ApplicationController
 
   private
 
+  include CONTROLLER_HELPERS
+  
   def thought_permits
     params.require(:thought).permit(:title, :body, :shout)
-  end
-
-  def check_login 
-    if session[:user_id] then return true end
-    logout_user
-    redirect_to root_path
-  end
-
-  def check_current_user
-    redirect_to user_thoughts_path(session[:user_id]) if params[:user_id].to_s != session[:user_id].to_s
-  end
-
-  def logout_user
-    session[:user_id] = nil
-    session[:username] = nil
   end
 
 end
