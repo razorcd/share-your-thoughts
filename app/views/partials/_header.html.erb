@@ -2,10 +2,12 @@
 
   <% if session[:user_id] %>
     <div class="user-info">
-      <span> You are logged in as <a href='<%= user_path(id: session[:user_id])+"/edit" %>' class="username"><%= session[:username] %> </a> </span>
-      <a class="logout-but" href="/users/logout">Logout</a>
+      <span> You are logged in as 
+        <a href='<%= user_thoughts_path(session[:user_id]) %>' class="username"><%=session[:username]%></a> 
+      <a href='<%= edit_user_path(id: session[:user_id]) %>' class="header-but"> edit </a> 
+      <a class="header-but" href="/users/logout">Logout</a>
     </div>
   <% end %>
 
-  <div class="title"> Share your thoughts </div>
+  <a href="/" class="title"> Share your thoughts </a>
 </div>

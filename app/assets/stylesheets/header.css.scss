@@ -6,11 +6,13 @@
   height:60px;
   
   .title {
+    display: block;
     font-size: 22pt;
     color: $dark-grey-color;
     padding: 12px;
     font-weight: bold;
     width: 300px;
+    text-decoration: none;
   }
 
   .user-info {
@@ -19,14 +21,16 @@
     margin-top: 30px;
 
     span {
-      margin:10px;
+      margin:5px;
     }
     .username {
-      color: #000000;
+      color: $dark-grey-color;
+      font-weight: bold;
     }
 
-    .logout-but {
+    .header-but {
       text-decoration: none;
+      margin: 0 10px;
       color:$dark-grey-color;
       &:hover {
         color: $light-blue-color;  
