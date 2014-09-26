@@ -4,6 +4,7 @@ FactoryGirl.define do
   factory :thought do
     title "Thought 1"
     body "Body thought 1"
+    user_id 1
   end
   factory :thought_strip, :class => Thought do
     title "  AAAA  "

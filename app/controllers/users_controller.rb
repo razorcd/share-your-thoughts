@@ -15,7 +15,9 @@ class UsersController < ApplicationController
       redirect_to user_thoughts_path(@user_register.id)
     else
       @user_register.clear_password_fields
-      render "new"
+      flash[:register_error] = @user_register.errors.full_messages 
+      redirect_to root_path
+      # render "new"
     end
   end
 

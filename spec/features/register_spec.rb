@@ -23,7 +23,7 @@ describe "fill Register Form" do
       find('.register_form form').fill_in('user_full_name', :with => "")
       click_button('Register')
 
-      current_path.should == users_path
+      current_path.should == root_path
       find(".register_form .error-message").should have_content("Full name can't be blank")
     end
 
@@ -33,7 +33,7 @@ describe "fill Register Form" do
       find('.register_form form').fill_in('user_full_name', :with => long_name)
       click_button('Register')
 
-      current_path.should == users_path
+      current_path.should == root_path
       find(".register_form .error-message").should have_content("Full name is too long")
     end
 
@@ -42,7 +42,7 @@ describe "fill Register Form" do
       find('.register_form form').fill_in('user_full_name', :with => "djfg874jf0_&s")
       click_button('Register')
 
-      current_path.should == users_path
+      current_path.should == root_path
       find(".register_form .error-message").should have_content("Full name is invalid")
     end
   end
@@ -53,7 +53,7 @@ describe "fill Register Form" do
       find('.register_form form').fill_in('user_username', :with => "")
       click_button('Register')
 
-      current_path.should == users_path
+      current_path.should == root_path
       find(".register_form .error-message").should have_content("Username can't be blank")
     end
 
@@ -62,7 +62,7 @@ describe "fill Register Form" do
       find('.register_form form').fill_in('user_username', :with => "ab")
       click_button('Register')
 
-      current_path.should == users_path
+      current_path.should == root_path
       find(".register_form .error-message").should have_content("Username is too short")
     end
 
@@ -72,7 +72,7 @@ describe "fill Register Form" do
       find('.register_form form').fill_in('user_username', :with => long_username)
       click_button('Register')
 
-      current_path.should == users_path
+      current_path.should == root_path
       find(".register_form .error-message").should have_content("Username is too long")
     end
 
@@ -81,7 +81,7 @@ describe "fill Register Form" do
       find('.register_form form').fill_in('user_username', :with => "fdgdf34ter6%^%$")
       click_button('Register')
 
-      current_path.should == users_path
+      current_path.should == root_path
       find(".register_form .error-message").should have_content("Username is invalid")
     end
   end
@@ -92,7 +92,7 @@ describe "fill Register Form" do
       find('.register_form form').fill_in('user_password', :with => "")
       click_button('Register')
 
-      current_path.should == users_path
+      current_path.should == root_path
       find(".register_form .error-message").should have_content("Password can't be blank")
     end
 
@@ -101,7 +101,7 @@ describe "fill Register Form" do
       find('.register_form form').fill_in('user_password', :with => "abcde")
       click_button('Register')
 
-      current_path.should == users_path
+      current_path.should == root_path
       find(".register_form .error-message").should have_content("Password is too short")
     end
 
@@ -111,7 +111,7 @@ describe "fill Register Form" do
       find('.register_form form').fill_in('user_password', :with => long_pass)
       click_button('Register')
 
-      current_path.should == users_path
+      current_path.should == root_path
       find(".register_form .error-message").should have_content("Password is too long")
     end
 
@@ -121,7 +121,7 @@ describe "fill Register Form" do
       find('.register_form form').fill_in('user_password_confirmation', :with => "")
       click_button('Register')
 
-      current_path.should == users_path
+      current_path.should == root_path
       find(".register_form .error-message").should have_content("Password does not match the password confirmation")
     end
   end
@@ -132,7 +132,7 @@ describe "fill Register Form" do
       find('.register_form form').fill_in('user_email', :with => "")
       click_button('Register')
 
-      current_path.should == users_path
+      current_path.should == root_path
       find(".register_form .error-message").should have_content("Email can't be blank")
     end
 
@@ -142,7 +142,7 @@ describe "fill Register Form" do
       find('.register_form form').fill_in('user_email', :with => long_email)
       click_button('Register')
 
-      current_path.should == users_path
+      current_path.should == root_path
       find(".register_form .error-message").should have_content("Email is too long")
     end
 
@@ -151,7 +151,7 @@ describe "fill Register Form" do
       find('.register_form form').fill_in('user_email', :with => "gdfg@dfgdf342.23423.423.434")
       click_button('Register')
 
-      current_path.should == users_path
+      current_path.should == root_path
       find(".register_form .error-message").should have_content("Email is invalid")
     end
   end
@@ -197,7 +197,7 @@ describe "fill Register Form" do
         page.body.should have_button('Register')
         click_button('Register')
 
-        current_path.should == "/users" #rooth path redirect here
+        current_path.should == root_path #"/users" #rooth path redirect here
         find(".register_form .error-message").should have_content("Username has already been taken")
         find(".register_form .error-message").should have_content("Email has already been taken")
       end
