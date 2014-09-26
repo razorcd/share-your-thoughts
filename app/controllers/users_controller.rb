@@ -35,6 +35,9 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def show
+    @current_user = User.find(session[:user_id])
+  end
 
   private
 

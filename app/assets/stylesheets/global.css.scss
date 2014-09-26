@@ -28,8 +28,8 @@ body, header, footer, .content {
 }
 
 
-/*register form*/
-.register_form, .login_form, .thought_form {
+/*form*/
+.register_form, .login_form, .thought_form, .user_form {
   display: block;
   border: 1px solid $light-grey-color;
   width: 230px;
@@ -81,6 +81,12 @@ body, header, footer, .content {
       background-color: $very-light-blue-color;
       box-shadow: inset 0 0 8px -4px $dark-grey-color;
     }
+  }
+
+  label {
+    font-size: 75%;
+    margin-left: 14px;
+    margin-top: 5px;
   }
 
   textarea {
