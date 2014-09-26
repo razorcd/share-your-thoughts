@@ -31,7 +31,10 @@
       <br />
       <%= f.label(:password, "*Password confirmation required:") %>
       <%= f.password_field(:password, :placeholder => "password") %>
-      <div class="submit-box"><%= submit_tag('Save', :class => "submit_button") %></div>
+      <div class="submit-box">
+        <%= submit_tag('Save', :class => "submit_button") %>
+        <a class="default_button" href='<%= edit_user_path(@current_user.id) %>'> Reset to defaults </a>
+      </div>
     <% end %>
     <div style="clear:both"></div>
   </div>

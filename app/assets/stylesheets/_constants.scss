@@ -24,3 +24,10 @@ $very-light-blue-color: #BFF2FF;
   /* W3C Markup, IE10 Release Preview */ 
   background-image: linear-gradient(to top left, #FFFFFF 0%, #00A3EF 100%);
 }
+
+@mixin text_links {
+  color: $dark-grey-color;
+  &:hover {
+    color: $light-blue-color;
+  }
+}

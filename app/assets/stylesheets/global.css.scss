@@ -121,6 +121,14 @@ body, header, footer, .content {
       cursor: pointer;
     }
   }
+
+  .default_button {
+    @include text_links;
+    font-size: 80%;
+    margin-left: 12px;
+    position: relative;
+    top: 10px;
+  }
 }
 
 .thought_form {
