@@ -16,6 +16,9 @@ class ThoughtsController < ApplicationController
   end
 
   def index
+    @thought ||= Thought.new
+    @user ||= User.find_by_id(params[:user_id]) if params[:user_id] #finding user
+    if @user == nil then redirect_to root_path end  #if no user was found, redirecting to root
   end
 
   private

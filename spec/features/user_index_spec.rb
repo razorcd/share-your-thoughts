@@ -8,9 +8,6 @@ describe "user list page (user#index)" do
     user
     user2
 
-    puts "************************"
-    puts root_url
-    puts root_path
     visit users_url
   end
 
