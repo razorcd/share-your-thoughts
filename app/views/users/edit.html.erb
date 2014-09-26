@@ -1,0 +1,38 @@
+<div class="bar"></div>
+
+<div class="show-panel">
+  <%= User.find(params[:id]).inspect %>
+  <p>Logged in as: <%= session[:username] %> , id: <%= session[:user_id] %></p>
+</div>
+
+
+
+<% if @current_user %>
+  <!-- register form -->
+  <div class="user_form">
+    <div class="form-title">Edit your details</div>
+      <ul class="error-message">
+        <% if flash[:edit_user_errors] %>
+          <% flash[:edit_user_errors].each do |e| %>
+            <li><%= e %></li>
+          <% end %>
+        <% end %>
+    </ul>
+    <%= form_for(@current_user, :url => user_path(@current_user), 
+                            :html => {:method => "PATCH"}) do |f| %>
+      <%= f.label(:full_name, "Full name:") %>
+      <%= f.text_field(:full_name, :placeholder => "full name") %>
+      <%= f.label(:username, "Username:") %>
+      <%= f.text_field(:username, :placeholder => "username") %>
+      
+      <%#= f.password_field(:password_confirmation, :placeholder => "password confirmation") %>
+      <%= f.label(:email, "Email:") %>
+      <%= f.text_field(:email, :placeholder => "email") %>
+      <br />
+      <%= f.label(:password, "*Password confirmation required:") %>
+      <%= f.password_field(:password, :placeholder => "password") %>
+      <div class="submit-box"><%= submit_tag('Save', :class => "submit_button") %></div>
+    <% end %>
+    <div style="clear:both"></div>
+  </div>
+<% end %>

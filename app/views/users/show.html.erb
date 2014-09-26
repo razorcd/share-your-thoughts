@@ -6,32 +6,3 @@
 </div>
 
 
-
-<% if @current_user %>
-  <!-- register form -->
-  <div class="user_form">
-    <div class="form-title">Edit your details</div>
-      <ul class="error-message">
-        <% if @current_user.errors %>
-          <% @current_user.errors.full_messages.each do |e| %>
-            <li><%= e %></li>
-          <% end %>
-        <% end %>
-    </ul>
-    <%= form_for(@current_user, :url => {:action => "create"}) do |f| %>
-      <%= f.label(:full_name, "Full name:") %>
-      <%= f.text_field(:full_name, :placeholder => "full name") %>
-      <%= f.label(:username, "Username:") %>
-      <%= f.text_field(:username, :placeholder => "username") %>
-      
-      <%#= f.password_field(:password_confirmation, :placeholder => "password confirmation") %>
-      <%= f.label(:email, "Email:") %>
-      <%= f.text_field(:email, :placeholder => "email") %>
-      <br />
-      <%= f.label(:password, "Password required:") %>
-      <%= f.password_field(:password, :placeholder => "password") %>
-      <div class="submit-box"><%= submit_tag('Save', :class => "submit_button") %></div>
-    <% end %>
-    <div style="clear:both"></div>
-  </div>
-<% end %>

@@ -11,12 +11,14 @@ describe "user edit page" do
       fill_in('user_username', :with => user.username)
       fill_in('user_password', :with => user.password)
     end
+    #LOGIN
     click_button("Login")
-    visit user_path(:id => user.id)
+
+    visit edit_user_path(:id => user.id)
   end
 
   it "should have 'Edit yout details' form" do
-    current_path.should == "/users/1"
+    current_path.should == "/users/1/edit"
     page.body.should have_css('.user_form')
 
     find('.user_form').find_field('user[full_name]').value.should == user.full_name
