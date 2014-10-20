@@ -16,8 +16,8 @@
           <%= link_to("Follow", {:user_id => session[:user_id], :controller => "relations", :action => "follow", :id => t.id}) %>
           <% else %>
           <!-- unfollow -->
-          <%= link_to("Unollow", {:user_id => session[:user_id], :controller => "relations", :action => "unfollow", :id => t.id}) %>
-        <% end unless (t.id == session[:user_id]) #except current user %>
+          <%= link_to("Unfollow", {:user_id => session[:user_id], :controller => "relations", :action => "unfollow", :id => t.id}) %>
+        <% end unless (session[:user_id]==nil || t.id == session[:user_id]) #except (not logged) or (list-item is current user) %>
 
 
         <div class="name-time"> registred on <%= t.created_at.strftime("%Y-%m-%d") %> at <%= t.created_at.strftime("%H:%M") %></div>
