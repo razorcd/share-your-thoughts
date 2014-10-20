@@ -29,6 +29,5 @@ RSpec.describe Relation, :type => :model do
       @u2.followees.size.should == 0  #@u2 doesen't follow anybody
     end
 
-
   end
 end

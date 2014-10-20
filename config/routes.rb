@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root "users#new"
   
   resources :users do
+    get 'relations/follow/:id' => 'relations#follow'
+    get 'relations/unfollow/:id' => 'relations#unfollow'
     resources :thoughts
     collection do
       post 'login'
