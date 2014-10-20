@@ -11,6 +11,7 @@ class ThoughtsController < ApplicationController
       redirect_to user_thoughts_path(session[:user_id])
     else
       # flash[:thought_errors] = @thought.errors.full_messages
+      @user ||= User.find_by_id(params[:user_id])
       render "index"
     end
   end
