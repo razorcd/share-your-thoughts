@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140914200702) do
+ActiveRecord::Schema.define(version: 20141020195108) do
 
   create_table "images", force: true do |t|
     t.integer "thought_id"
@@ -19,6 +19,14 @@ ActiveRecord::Schema.define(version: 20140914200702) do
   end
 
   add_index "images", ["thought_id"], name: "index_images_on_thought_id"
+
+  create_table "relations", id: false, force: true do |t|
+    t.integer "follower_id"
+    t.integer "followee_id"
+  end
+
+  add_index "relations", ["followee_id"], name: "index_relations_on_followee_id"
+  add_index "relations", ["follower_id"], name: "index_relations_on_follower_id"
 
   create_table "thoughts", force: true do |t|
     t.string   "title",      limit: 64

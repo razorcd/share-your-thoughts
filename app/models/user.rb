@@ -2,6 +2,15 @@ class User < ActiveRecord::Base
   has_many :thoughts, :dependent => :destroy
   has_secure_password validations: false
   before_validation :strip_all
+
+  #follow relation
+  # has_many :followers_relation, class_name: "Relation", foreign_key: "followee_id"   #or better use trough
+  # has_many :followees_relation, class_name: "Relation", foreign_key: "follower_id"   #or better use trough
+  has_many :followers_relation, class_name: "Relation", foreign_key: "followee_id"
+  has_many :followees_relation, class_name: "Relation", foreign_key: "follower_id"
+
+  has_many :followers, through: :followers_relation
+  has_many :followees, through: :followees_relation
   
   # attr_accessor :password, 
   attr_accessor :password_confirmation
