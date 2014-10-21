@@ -10,7 +10,7 @@ body, header, footer, .content {
 }
 
 body {
-  width: 1000px;
+  max-width: 1000px;
   margin: 0 auto;
   background: url('../images/bg.jpg');
 }
