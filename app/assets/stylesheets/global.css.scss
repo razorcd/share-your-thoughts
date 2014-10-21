@@ -9,6 +9,12 @@ body, header, footer, .content {
   color: $dark-grey-color;
 }
 
+body {
+  width: 1000px;
+  margin: 0 auto;
+  background: url('../images/bg.jpg');
+}
+
 .bar {
   height:5px;
 }
