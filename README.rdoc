@@ -1,5 +1,8 @@
 =SHARE YOUT THOUGHTS - MINIBLOG
 
+==LIVE  
+http://shareyourthoughts.herokuapp.com/
+
 ==TEST
 
 run 'bundle exec rspec' to run all tests
