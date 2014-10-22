@@ -10,4 +10,11 @@
   <% end %>
 
   <a href="/" class="title"> Share your thoughts </a>
+  <nav>
+    <%= link_to("Home", '/') %>
+    <%= link_to("Users list", {:controller => "users", :action => "index"}) %>
+    <%= link_to("My Page", {:controller => "thoughts", :action => "index", :user_id => session[:user_id]}) unless !session[:user_id] %>
+    <!-- <a href="#">Following thoughts</a> -->
+    <!-- <a href="#">My page?</a> -->
+  </nav>
 </div>

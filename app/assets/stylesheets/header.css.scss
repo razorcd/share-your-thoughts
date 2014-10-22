@@ -6,13 +6,23 @@
   height:60px;
   
   .title {
-    display: block;
+    /*display: block;*/
+    float:left;
     font-size: 22pt;
     color: $dark-grey-color;
     padding: 12px;
     font-weight: bold;
     width: 300px;
     text-decoration: none;
+  }
+  nav {
+    float:left;
+    margin-top:28px;
+
+    a {
+      margin:10px;
+      @include text_links;
+    }
   }
 
   .user-info {

@@ -7,6 +7,9 @@ describe "header" do
   context "LOGGED OUT" do
     it "should have only title" do
       find('header').find(".title").should have_content("Share your thoughts")
+      find('nav').should have_link('Home')
+      find('nav').should have_link('Users list')
+      find('nav').should_not have_link('My Page')
     end
   end
 
@@ -29,6 +32,10 @@ describe "header" do
       find('header').find(".user-info").should have_link(user.username)
       find('header').find(".user-info").should have_link('edit')
       find('header').find(".user-info").should have_link("Logout")
+
+      find('nav').should have_link('Home')
+      find('nav').should have_link('Users list')
+      find('nav').should have_link('My Page')
     end
   end
 end

@@ -1,0 +1,15 @@
+<% if !session[:user_id] %>
+  <!-- login form -->
+  <div class="login_form">
+      <% @user_login ||= User.new %>
+      <ul class="error-message">
+          <li><%= notice %></li>
+      </ul>
+      <%= form_for(@user_login, :url => {:action => "login"}) do |f| %>
+        <%= f.text_field(:username, :placeholder => "username") %>
+        <%= f.password_field(:password, :placeholder => "password") %>
+        <div class="submit-box"><%= submit_tag('Login', :class => "submit_button") %></div>
+      <% end %>
+    <div style="clear:both"></div>
+  </div>
+<% end %>
