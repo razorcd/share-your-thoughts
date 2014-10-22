@@ -7,7 +7,7 @@
     <% @users.each do |t| %>
       <div class="thought-item">
         <!-- shout -->
-        <div class="title"> <%= t.full_name %> </div>
+        <div class="title"> <%= link_to(t.full_name, user_path(t.id)) %> </div>
         <div class="body">  <%= t.username  %> </div>
         <div class="follow"> Following: <%= t.followees.size %>, Followed by: <%= t.followers.size %> </div>
 

@@ -56,7 +56,7 @@ describe "GET root" do
           page.body.should have_css(".thoughts_list")
           find(".thoughts_list .thought-item").find(".title").should have_text(thought.title)
           find(".thoughts_list .thought-item").find(".body").should have_text(thought.body)
-          find(".thoughts_list .thought-item").find(".name-time").should have_text(thought.user.full_name)
+          find(".thoughts_list .thought-item").find(".name-time").should have_link(thought.user.full_name)
         end
     end
 

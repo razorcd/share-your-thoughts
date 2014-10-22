@@ -57,7 +57,7 @@
           <!-- shout -->
           <div class="title"> <%= t.title %> </div>
           <div class="body">  <%= t.body  %> </div>
-          <div class="name-time"> by <%= @user.full_name %>  on <%= t.created_at.strftime("%Y-%m-%d") %> at <%= t.created_at.strftime("%H:%M") %></div>
+          <div class="name-time"> <%# by <%= @user.full_name %> created at <%= t.created_at.strftime("%Y-%m-%d") %> at <%= t.created_at.strftime("%H:%M") %></div>
         </div>
       <% end %>
 
