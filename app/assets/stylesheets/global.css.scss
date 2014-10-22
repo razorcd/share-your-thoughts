@@ -154,6 +154,7 @@ a {
   width: 600px;
   min-height: 50px;
   margin: 10px auto;
+  padding-bottom: 10px;
   border-radius: 10px;
   background-color: #ffffff;
   box-shadow: 2px 2px 15px $dark-grey-color;
@@ -164,9 +165,12 @@ a {
     padding: 15px;
   }
 
-  .thought-item:not(:last-child) {
+  .thought-item:not(:nth-last-child(1)) {
     border-bottom: 1px solid $light-grey-color;
   }
+/*  .thought-item:nth-last-child(1) {
+    margin-bottom: 10px;
+  }*/
 
   .thought-item {
     padding: 15px;
@@ -180,9 +184,21 @@ a {
       margin: 10px;
     }
     .name-time {
-      text-align: right;
+      float: right;
       font-size: 10pt;
-
     }
+    .follow {
+      float:left;
+      font-size: 10pt;
+      margin: 5px 8px;
+    }
+
+    .follow_but {
+      font-weight: bold;
+      float:left;
+      font-size: 10pt;
+      margin: 5px 8px;
+      }
+
   }
 }

@@ -9,21 +9,21 @@
         <!-- shout -->
         <div class="title"> <%= link_to(t.full_name, user_path(t.id)) %> </div>
         <div class="body">  <%= t.username  %> </div>
-        <div class="follow"> Following: <%= t.followees.size %>, Followed by: <%= t.followers.size %> </div>
+        
 
         <% if (!User.find_by_id(session[:user_id]).followees.any? {|x| x.id == t.id}) %>
           <!-- follow -->
-          <%= link_to("Follow", {:user_id => session[:user_id], :controller => "relations", :action => "follow", :id => t.id}) %>
+          <%= link_to("Follow", {:user_id => session[:user_id], :controller => "relations", :action => "follow", :id => t.id}, {:class => "follow_but"}) %>
           <% else %>
           <!-- unfollow -->
-          <%= link_to("Unfollow", {:user_id => session[:user_id], :controller => "relations", :action => "unfollow", :id => t.id}) %>
+          <%= link_to("Unfollow", {:user_id => session[:user_id], :controller => "relations", :action => "unfollow", :id => t.id}, {:class => "follow_but"}) %>
         <% end unless (session[:user_id]==nil || t.id == session[:user_id]) #except (not logged) or (list-item is current user) %>
-
-
+        
+        <div class="follow"> Following: <%= t.followees.size %>, Followed by: <%= t.followers.size %> </div>
         <div class="name-time"> registred on <%= t.created_at.strftime("%Y-%m-%d") %> at <%= t.created_at.strftime("%H:%M") %></div>
+        <div style="clear: both"></div>
       </div>
     <% end %>
-
   </div>  
 <% end %>
 
