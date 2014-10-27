@@ -6,9 +6,13 @@
 </div>
 
 
+<% if flash[:user_message] %>
+  <div class="message"> <%= flash[:user_message] %></div>
+<% end %>
 
+
+<!-- edit details form -->
 <% if @current_user %>
-  <!-- register form -->
   <div class="user_form">
     <div class="form-title">Edit your details</div>
       <ul class="error-message">
@@ -29,13 +33,30 @@
       <%= f.label(:email, "Email:") %>
       <%= f.text_field(:email, :placeholder => "email") %>
       <br />
-      <%= f.label(:password, "*Password confirmation required:") %>
+      <%= f.label(:password, "*Password confirmation required") %>
       <%= f.password_field(:password, :placeholder => "password") %>
       <div class="submit-box">
         <%= submit_tag('Save', :class => "submit_button") %>
         <a class="default_button" href='<%= edit_user_path(@current_user.id) %>'> Reset to defaults </a>
       </div>
     <% end %>
+    <div style="clear:both"></div>
+  </div>
+<% end %>
+
+
+<!-- edit details form -->
+<% if @current_user %>
+  <div class="user_form">
+    <div class="form-title">Resend email confirmation</div>
+      <ul class="error-message">
+        <% if flash[:email_sent_errors] %>
+          <% flash[:email_sent_errors].each do |e| %>
+            <li><%= e %></li>
+          <% end %>
+        <% end %>
+    </ul>
+    <%= link_to("Resend", {:action => "resend_email"}, {:class => "submitlike_button mid"}) %>
     <div style="clear:both"></div>
   </div>
 <% end %>

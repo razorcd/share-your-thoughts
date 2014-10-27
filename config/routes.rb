@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       post 'login'
       get 'logout'
       get 'confirm_email/:id' => 'users#confirm_email'
+      get 'resend_email' => 'users#resend_email'
     end
 
     resources :thoughts

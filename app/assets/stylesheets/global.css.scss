@@ -143,6 +143,38 @@ a {
   }
 }
 
+
+.submitlike_button {
+  display: block;
+  margin: 8px 0;
+  padding: 8px;
+  border: 1px solid $light-grey-color;
+  border-radius: 8px;
+  width:75px;
+  text-decoration: none;
+  text-align: center;
+  
+  &:hover {
+    background-color: $light-blue-color;
+    color: #ffffff;
+    cursor: pointer;
+  }
+}
+
+.mid {
+  margin:8px auto;
+}
+
+.left {
+  float: left;
+  margin: 8px;
+}
+
+.right {
+  float: right;
+  margin: 8px;
+}
+
 .thought_form {
   float: right;
 }

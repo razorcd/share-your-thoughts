@@ -1,0 +1,17 @@
+<% app_url = root_url + 'users/confirm_email/' + @user.id.to_s + '?email=' + @user.email %>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+  <h2>Shareyourthoughts</h2>
+  <p>Hello <%= @user.full_name %> </p>
+  <br />
+  <p> Your user name is: <%= @user.username %> </p>
+  <br />
+  <p>To confirm your email follow this link: <%=  link_to('HERE',app_url) %> </p>
+  <br />
+  <p>Thanks for using Shareyourthoughts.</p>
+</body>
+</html>

@@ -1,75 +1,152 @@
 require 'rails_helper'
 
 describe "user edit page" do
-  let(:user) {FactoryGirl.create(:user)}
 
-  before do
-    visit root_path  #or new_user_path???
+  describe "Edit your details" do
+    let(:user) {FactoryGirl.create(:user)}
 
-    #fill in with correct details
-    within '.login_form form' do
-      fill_in('user_username', :with => user.username)
-      fill_in('user_password', :with => user.password)
+    before do
+      visit root_path  #or new_user_path???
+
+      #fill in with correct details
+      within '.login_form form' do
+        fill_in('user_username', :with => user.username)
+        fill_in('user_password', :with => user.password)
+      end
+      #LOGIN
+      click_button("Login")
+
+      visit edit_user_path(:id => user.id)
     end
-    #LOGIN
-    click_button("Login")
 
-    visit edit_user_path(:id => user.id)
+    it "should have 'Edit yout details' form" do
+      current_path.should == "/users/1/edit"
+      page.body.should have_css('.user_form')
+
+      first('.user_form').find_field('user[full_name]').value.should == user.full_name
+      first('.user_form').find_field('user[username]').value.should == user.username
+      first('.user_form').find_field('user[email]').value.should == user.email
+      first('.user_form').find_field('user[password]').value.should == nil #""
+      first('.user_form').should have_button('Save')
+    end
+
+    it "should update User" do
+      current_path.should == "/users/1/edit"
+      first('.user_form').fill_in('user[full_name]', :with => "NewFullName")
+      first('.user_form').fill_in('user[username]', :with => "username222")
+      first('.user_form').fill_in('user[email]', :with => "email222@ema.il")
+      first('.user_form').fill_in('user[password]', :with => "password")
+      click_button('Save')
+      
+      current_path.should == "/users/1"  #should redirect to same address
+      first('.user_form').find_field('user[full_name]').value.should == "NewFullName"
+      first('.user_form').find_field('user[username]').value.should == "username222"
+      first('.user_form').find_field('user[email]').value.should == "email222@ema.il"
+      first('.user_form').find_field('user[password]').value.should == nil #""
+    end
+
+    it "should not send email confirmation if email wasn't changed" do
+      ActionMailer::Base.deliveries = []
+      current_path.should == "/users/1/edit"
+      first('.user_form').fill_in('user[full_name]', :with => "NewFullName")
+      first('.user_form').fill_in('user[username]', :with => "username222")
+      # first('.user_form').fill_in('user[email]', :with => "email222@ema.il")
+      first('.user_form').fill_in('user[password]', :with => "password")
+      click_button('Save')
+
+      ActionMailer::Base.deliveries.count.should == 0      
+    end
+
+    it "should update email and send new 'Email confirmation' email on email change" do
+      ActionMailer::Base.deliveries = []
+      current_path.should == "/users/1/edit"
+      first('.user_form').fill_in('user[email]', :with => "email222@ema.il")
+      first('.user_form').fill_in('user[password]', :with => "password")
+      click_button('Save')
+
+      ActionMailer::Base.deliveries.count.should == 1
+      ActionMailer::Base.deliveries[0].body.encoded.should match('users/confirm_email')
+      # page.body.should have_content('Confirmation email sent')   #should get a 'Confirmation email sent' message
+    end
+
+    it "should set 'user.email_confirmed' to false if email si updated" do
+      #set user.email_confirmed = true
+      u = User.find(1)
+      u.email_confirmed = true
+      u.save
+
+      User.find(1).email_confirmed.should == true  #check user.email_confirmed == true
+      current_path.should == "/users/1/edit"
+      first('.user_form').fill_in('user[email]', :with => "email222@ema.il")
+      first('.user_form').fill_in('user[password]', :with => "password")
+      click_button('Save')
+
+      User.find(1).email_confirmed.should == false #check user.email_confirmed == false  after email change
+    end
+
+
+
+    it "should give wrong password errors" do
+      current_path.should == "/users/1/edit"
+      first('.user_form').fill_in('user[full_name]', :with => "NewFullName")
+      first('.user_form').fill_in('user[username]', :with => "username222")
+      first('.user_form').fill_in('user[email]', :with => "email222@ema.il")
+      first('.user_form').fill_in('user[password]', :with => "fsf")
+      click_button('Save')
+      
+      current_path.should == "/users/1"  #should redirect to same address
+      first('.user_form').find('.error-message').should have_content("Password is wrong")
+      first('.user_form').find_field('user[full_name]').value.should == "NewFullName"
+      first('.user_form').find_field('user[username]').value.should == "username222"
+      first('.user_form').find_field('user[email]').value.should == "email222@ema.il"
+      first('.user_form').find_field('user[password]').value.should == nil #""
+    end
+
+    it "should give validation errors errors" do
+      current_path.should == "/users/1/edit"
+      first('.user_form').fill_in('user[full_name]', :with => "")
+      first('.user_form').fill_in('user[username]', :with => "")
+      first('.user_form').fill_in('user[email]', :with => "")
+      first('.user_form').fill_in('user[password]', :with => "password")
+      click_button('Save')
+      
+      current_path.should == "/users/1"  #should redirect to same address
+      first('.user_form').find('.error-message').should have_content("Full name can't be blank")
+      first('.user_form').find('.error-message').should have_content("Username is invalid")
+      first('.user_form').find('.error-message').should have_content("Email is invalid")
+    end
   end
 
-  it "should have 'Edit yout details' form" do
-    current_path.should == "/users/1/edit"
-    page.body.should have_css('.user_form')
+  describe "Resend email confirmation" do
+    let(:user) {FactoryGirl.create(:user)}
 
-    find('.user_form').find_field('user[full_name]').value.should == user.full_name
-    find('.user_form').find_field('user[username]').value.should == user.username
-    find('.user_form').find_field('user[email]').value.should == user.email
-    find('.user_form').find_field('user[password]').value.should == nil #""
-    find('.user_form').should have_button('Save')
+    before do
+      visit root_path  #or new_user_path???
+
+      #fill in with correct details
+      within '.login_form form' do
+        fill_in('user_username', :with => user.username)
+        fill_in('user_password', :with => user.password)
+      end
+      #LOGIN
+      click_button("Login")
+
+      visit edit_user_path(:id => user.id)
+    end   
+
+    it "should have Reset email confirmation button" do
+      page.should have_content('Resend email confirmation')
+      page.should have_link('Resend')
+    end
+
+    it "Resend link should send email" do
+      ActionMailer::Base.deliveries = []
+      click_link('Resend')
+      ActionMailer::Base.deliveries.count.should == 1
+      ActionMailer::Base.deliveries[0].body.encoded.should match('users/confirm_email')
+      page.body.should have_content('Confirmation email sent')   #should get a 'Confirmation email sent' message
+    end
+
   end
 
-  it "should update User" do
-    current_path.should == "/users/1/edit"
-    find('.user_form').fill_in('user[full_name]', :with => "NewFullName")
-    find('.user_form').fill_in('user[username]', :with => "username222")
-    find('.user_form').fill_in('user[email]', :with => "email222@ema.il")
-    find('.user_form').fill_in('user[password]', :with => "password")
-    click_button('Save')
-    
-    current_path.should == "/users/1"  #should redirect to same address
-    find('.user_form').find_field('user[full_name]').value.should == "NewFullName"
-    find('.user_form').find_field('user[username]').value.should == "username222"
-    find('.user_form').find_field('user[email]').value.should == "email222@ema.il"
-    find('.user_form').find_field('user[password]').value.should == nil #""
-  end
-
-  it "should give wrong password errors" do
-    current_path.should == "/users/1/edit"
-    find('.user_form').fill_in('user[full_name]', :with => "NewFullName")
-    find('.user_form').fill_in('user[username]', :with => "username222")
-    find('.user_form').fill_in('user[email]', :with => "email222@ema.il")
-    find('.user_form').fill_in('user[password]', :with => "fsf")
-    click_button('Save')
-    
-    current_path.should == "/users/1"  #should redirect to same address
-    find('.user_form').find('.error-message').should have_content("Password is wrong")
-    find('.user_form').find_field('user[full_name]').value.should == "NewFullName"
-    find('.user_form').find_field('user[username]').value.should == "username222"
-    find('.user_form').find_field('user[email]').value.should == "email222@ema.il"
-    find('.user_form').find_field('user[password]').value.should == nil #""
-  end
-
-  it "should give validation errors errors" do
-    current_path.should == "/users/1/edit"
-    find('.user_form').fill_in('user[full_name]', :with => "")
-    find('.user_form').fill_in('user[username]', :with => "")
-    find('.user_form').fill_in('user[email]', :with => "")
-    find('.user_form').fill_in('user[password]', :with => "password")
-    click_button('Save')
-    
-    current_path.should == "/users/1"  #should redirect to same address
-    find('.user_form').find('.error-message').should have_content("Full name can't be blank")
-    find('.user_form').find('.error-message').should have_content("Username is invalid")
-    find('.user_form').find('.error-message').should have_content("Email is invalid")
-  end
 end

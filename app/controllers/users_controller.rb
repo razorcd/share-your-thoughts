@@ -50,19 +50,40 @@ class UsersController < ApplicationController
   def update
     @current_user = User.find(session[:user_id])
     if @current_user
+      if @current_user.email != user_permits[:email]    #if email changed too
+        send_email_confirmation = true
+        @current_user.email_confirmed = false
+      else 
+        send_email_confirmation = false
+      end
       @current_user.full_name = user_permits[:full_name]
       @current_user.username = user_permits[:username]
       @current_user.email = user_permits[:email]
+      
       if @current_user.authenticate(user_permits[:password]) 
-        #TODO: add email_confiemed = false  ? to confirm email again
-        @current_user.save  #will add the error messages if save failed to @current_user.errors.full_messages
+        if @current_user.save  #will add the error messages if save failed to @current_user.errors.full_messages
+          if send_email_confirmation then UserMailer.email_confirmation_email(@current_user).deliver end  #send email
+          flash[:user_message] = "Details changed"
+        end  
       else
         @current_user.errors[:password] << "is wrong"
       end
     end
+
     flash[:edit_user_errors] = @current_user.errors.full_messages
     #redirect_to edit_user_path(session[:user_id])
     render "edit"
+  end
+
+  def resend_email
+    @user = User.find_by_id(session[:user_id])
+    if @user 
+      UserMailer.email_confirmation_email(@user).deliver #send email
+      flash[:user_message] = "Confirmation email sent"
+    elsif
+      flash[:email_sent_errors] = "Error finding user"
+    end
+    redirect_to edit_user_path(session[:user_id])
   end
 
   def confirm_email
@@ -85,6 +106,5 @@ class UsersController < ApplicationController
   def user_permits
     params.require(:user).permit(:full_name, :username, :password, :password_confirmation, :email)
   end
-
 
 end

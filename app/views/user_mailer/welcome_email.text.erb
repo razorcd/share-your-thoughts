@@ -1,3 +1,5 @@
+<% app_url = root_url + 'users/confirm_email/' + @user.id.to_s + '?email=' + @user.email %>
+
 Welcome to Shareyourthoughts
 ===============================================
 
@@ -6,6 +8,7 @@ Hello <%= @user.full_name %>
 You have successfully registred.
 Your user name is: <%= @user.username %> 
 
-To confirm your emal follow this link: #
+To confirm your emal follow this link: 
+<%= app_url %>
 
 Thanks for joining.

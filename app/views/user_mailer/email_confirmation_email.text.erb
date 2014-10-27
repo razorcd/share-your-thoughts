@@ -1,0 +1,13 @@
+<% app_url = root_url + 'users/confirm_email/' + @user.id.to_s + '?email=' + @user.email %>
+
+Shareyourthoughts
+=================
+
+Hello <%= @user.full_name %>
+
+Your user name is: <%= @user.username %>
+
+To confirm your email follow this link: 
+<%= app_url %>
+
+Thanks for using Shareyourthoughts.
