@@ -158,9 +158,12 @@ describe "fill Register Form" do
 
   context "valid fields" do
     before do
+      # @nr_of_email_deliveries = ActionMailer::Base.deliveries.count   #nr of email deliveries
+      ActionMailer::Base.deliveries = [] #clear email deliveries
+
       #register with valid fields first
       page.body.should have_button("Register")
-      click_button('Register')      
+      click_button('Register')
     end
 
     it "should create a new user in DB" do
@@ -176,6 +179,10 @@ describe "fill Register Form" do
     it "should be Logged In after registering" do
       visit "/users/1/thoughts"
       current_path.should == "/users/1/thoughts"
+    end
+
+    it "should send Welcome email after registering" do
+      ActionMailer::Base.deliveries.count.should == 1   #email delivery confirmed
     end
 
     context "username, email already exists in DB" do

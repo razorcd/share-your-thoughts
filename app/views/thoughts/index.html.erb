@@ -4,6 +4,12 @@
   <% if @user.email_confirmed == false %>
     <div class="message"> Please confirm your email so in case you forget your password we can send you a new one.</div>
   <% end %>
+
+  <% if flash[:user_message] %>
+    <div class="message"> <%= flash[:user_message] %></div>
+  <% end %>
+
+
 <% end %>
 
 <div class="show-panel">

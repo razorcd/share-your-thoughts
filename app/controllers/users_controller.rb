@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :check_login, :except => [:new, :create, :login, :index]
+  before_action :check_login, :except => [:new, :create, :login, :index, :confirm_email]
 
   def index
     @users = User.all
@@ -15,7 +15,8 @@ class UsersController < ApplicationController
     @user_register = User.new(user_permits)
 
     if @user_register.save
-      login_user(@user_register)
+      UserMailer.welcome_email(@user_register).deliver #send email
+      login_user(@user_register) #login
       redirect_to user_thoughts_path(@user_register.id)
     else
       @user_register.clear_password_fields
@@ -63,6 +64,19 @@ class UsersController < ApplicationController
     #redirect_to edit_user_path(session[:user_id])
     render "edit"
   end
+
+  def confirm_email
+    user = User.find_by_id(params[:id])
+
+    flash[:user_message] = "Email already confirmed" if user.email_confirmed == true
+    if user && user.email == params[:email] && user.email_confirmed == false
+      user[:email_confirmed] = true
+      user.save ? flash[:user_message] = "Email confirmed" : flash[:user_message] = "Email failed to confirmed"
+    end
+    redirect_to root_path
+  end
+
+
 
   private
 

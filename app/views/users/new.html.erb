@@ -2,6 +2,10 @@
 
 <div class="bar"></div>
 
+<% if flash[:user_message] %>
+  <div class="message"> <%= flash[:user_message] %></div>
+<% end %>
+
 <!-- Thoughts List -->
 <% if @allthoughts.size > 0 %>
   <div class="thoughts_list">

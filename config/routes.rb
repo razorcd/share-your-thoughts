@@ -5,11 +5,14 @@ Rails.application.routes.draw do
   resources :users do
     get 'relations/follow/:id' => 'relations#follow'
     get 'relations/unfollow/:id' => 'relations#unfollow'
-    resources :thoughts
+    
     collection do
       post 'login'
       get 'logout'
+      get 'confirm_email/:id' => 'users#confirm_email'
     end
+
+    resources :thoughts
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

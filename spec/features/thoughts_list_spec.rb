@@ -44,7 +44,6 @@ describe "Thoughts List" do
     it "should have correct thought fields" do
       find(".thoughts_list .thought-item").find(".title").should have_text(thought.title)
       find(".thoughts_list .thought-item").find(".body").should have_text(thought.body)
-      find(".thoughts_list .thought-item").find(".name-time").should have_text(user.full_name)
       find(".thoughts_list .thought-item").find(".name-time").should have_text(thought.created_at.strftime("%Y-%m-%d"))
     end
 
