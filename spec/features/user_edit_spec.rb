@@ -149,4 +149,88 @@ describe "user edit page" do
 
   end
 
+  describe "Change your password" do
+
+    let(:user) {FactoryGirl.create(:user)}
+
+    before do
+      visit root_path  #or new_user_path???
+
+      #fill in with correct details
+      within '.login_form form' do
+        fill_in('user_username', :with => user.username)
+        fill_in('user_password', :with => user.password)
+      end
+      #LOGIN
+      click_button("Login")
+
+      visit edit_user_path(:id => user.id)
+    end
+
+
+    it "should change password on correct fields" do
+      current_path.should == "/users/1/edit"
+      page.find('#change_password').fill_in('user[old_password]', :with => "password")
+      page.find('#change_password').fill_in('user[password]', :with => "password1")
+      page.find('#change_password').fill_in('user[password_confirmation]', :with => "password1")
+      page.find('#change_password').click_button("Reset")
+
+      current_path.should == "/users/1/edit"
+      page.first('.message').should have_content('Password changed')
+      user = User.find(1)
+      user.authenticate('password1').should_not == false   #password was changed
+      user.authenticate('password').should == false
+    end
+
+    it "should not change password on incorrect old password" do
+      current_path.should == "/users/1/edit"
+      page.find('#change_password').fill_in('user[old_password]', :with => "wrong_password")
+      page.find('#change_password').fill_in('user[password]', :with => "password1")
+      page.find('#change_password').fill_in('user[password_confirmation]', :with => "password1")
+      page.find('#change_password').click_button("Reset")
+
+      current_path.should == "/users/1/edit"
+      page.find('#change_password').find('.error-message').should have_content('Wrong old password')
+      user.authenticate('password').should_not == false   #password was not changed
+    end
+
+    it "should not change password on empty new password" do
+      current_path.should == "/users/1/edit"
+      page.find('#change_password').fill_in('user[old_password]', :with => "password")
+      page.find('#change_password').fill_in('user[password]', :with => "")
+      page.find('#change_password').fill_in('user[password_confirmation]', :with => "")
+      page.find('#change_password').click_button("Reset")
+
+      current_path.should == "/users/1/edit"
+      page.find('#change_password').find('.error-message').should have_content('Enter new password and confirmation')
+      user.authenticate('password').should_not == false   #password was not changed
+    end    
+
+
+    it "should not change password on  new password != password confirmation" do
+      current_path.should == "/users/1/edit"
+      page.find('#change_password').fill_in('user[old_password]', :with => "password")
+      page.find('#change_password').fill_in('user[password]', :with => "qwerty")
+      page.find('#change_password').fill_in('user[password_confirmation]', :with => "sdfgdfhg")
+      page.find('#change_password').click_button("Reset")
+
+      current_path.should == "/users/1/edit"
+      page.find('#change_password').find('.error-message').should have_content('Password does not match')
+      user.authenticate('password').should_not == false   #password was not changed
+    end 
+
+    it "should not change password on  invalid new pasword" do
+      current_path.should == "/users/1/edit"
+      page.find('#change_password').fill_in('user[old_password]', :with => "password")
+      page.find('#change_password').fill_in('user[password]', :with => "123")
+      page.find('#change_password').fill_in('user[password_confirmation]', :with => "123")
+      page.find('#change_password').click_button("Reset")
+
+      current_path.should == "/users/1/edit"
+      page.find('#change_password').find('.error-message').should have_content('Password is too short')
+      user.authenticate('password').should_not == false   #password was not changed
+    end 
+  end
+
+
 end

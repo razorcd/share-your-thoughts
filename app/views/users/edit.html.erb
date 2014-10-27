@@ -60,3 +60,35 @@
     <div style="clear:both"></div>
   </div>
 <% end %>
+
+
+
+
+
+<!-- edit password form -->
+<% if @current_user %>
+  <div class="user_form" id="change_password">
+    <div class="form-title">Change your password</div>
+      <ul class="error-message">
+        <% if flash[:edit_password_errors] %>
+          <% flash[:edit_password_errors].each do |e| %>
+            <li><%= e %></li>
+          <% end %>
+        <% end %>
+    </ul>
+
+
+    <%= form_tag(:action => "change_password") do %>
+      <%= password_field(:user, :old_password, :placeholder => "old password") %>
+      <%= password_field(:user, :password, :placeholder => "new password") %>
+      <%= password_field(:user, :password_confirmation, :placeholder => "confirm new  password") %>
+      <div class="submit-box">
+        <%= submit_tag('Reset', :class => "submit_button") %>
+        <!-- <a class="default_button" href='<%= edit_user_path(@current_user.id) %>'> Reset to defaults </a> -->
+      </div>
+    <% end %>
+
+
+    <div style="clear:both"></div>
+  </div>
+<% end %>

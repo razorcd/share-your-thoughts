@@ -75,6 +75,23 @@ class UsersController < ApplicationController
     render "edit"
   end
 
+  def change_password
+    passwords = params[:user]
+    flash[:edit_password_errors] = [] #set flash messages as array
+    @current_user = User.find(session[:user_id])
+    if @current_user.authenticate(passwords[:old_password])  #confirm old password
+      if passwords[:password].empty? then flash[:edit_password_errors] << "Enter new password and confirmation" end
+        @current_user.password = passwords[:password]
+        @current_user.password_confirmation = passwords[:password_confirmation]
+        if @current_user.save && !passwords[:password].empty? then flash[:user_message] = "Password changed" end
+    else
+      flash[:edit_password_errors] << "Wrong old password"
+    end
+    flash[:edit_password_errors].concat(@current_user.errors.full_messages)
+    redirect_to edit_user_path(session[:user_id])
+  end
+
+
   def resend_email
     @user = User.find_by_id(session[:user_id])
     if @user 
@@ -106,5 +123,9 @@ class UsersController < ApplicationController
   def user_permits
     params.require(:user).permit(:full_name, :username, :password, :password_confirmation, :email)
   end
+
+  # def password_permits
+  #   params.permit(:old_password, :password, :password_confirmation)
+  # end
 
 end
