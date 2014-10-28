@@ -8,7 +8,9 @@
       <%= form_for(@user_login, :url => {:action => "login"}) do |f| %>
         <%= f.text_field(:username, :placeholder => "username") %>
         <%= f.password_field(:password, :placeholder => "password") %>
-        <div class="submit-box"><%= submit_tag('Login', :class => "submit_button") %></div>
+        <div class="submit-box"><%= submit_tag('Login', :class => "submit_button") %>
+          <%= link_to("Forgot your password?", {:action => "forgot_password"}, {:class => "default_button"}) %>
+        </div>
       <% end %>
     <div style="clear:both"></div>
   </div>

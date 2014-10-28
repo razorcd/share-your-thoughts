@@ -12,4 +12,10 @@ class UserMailer < ActionMailer::Base
     @url = root_url
     mail(to: @user.email, subject: 'Shareyourthoughts email confirmation')
   end
+
+  def forgot_password_email(userhash)
+    @user = userhash
+    @url = root_url
+    mail(to: @user.email, subject: 'Shareyourthoughts new password')
+  end
 end

@@ -121,3 +121,18 @@ describe "fill Register Form" do
   end
 
 end
+
+describe "'Forgot your password?' link" do
+  before do
+    visit root_path
+  end
+
+  it "should be present" do
+    find('.login_form form').should have_link('Forgot your password?')
+  end
+
+  it "should link to forgot_password form page" do
+    find('.login_form form').click_link('Forgot your password?')
+    current_path.should == '/users/forgot_password'
+  end
+end

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :check_login, :except => [:new, :create, :login, :index, :confirm_email]
+  before_action :check_login, :except => [:new, :create, :login, :index, :confirm_email, :forgot_password, :reset_forgot_password]
 
   def index
     @users = User.all
@@ -91,6 +91,35 @@ class UsersController < ApplicationController
     redirect_to edit_user_path(session[:user_id])
   end
 
+  def forgot_password
+  end
+
+  def reset_forgot_password
+    flash[:forgot_password_errors] = []
+    email_regex = Regexp.new(/\A[_a-zA-Z0-9]([\-+_%.a-zA-Z0-9]+)?@([_+\-%a-zA-Z0-9]+)(\.[a-zA-Z0-9]{0,6}){1,2}([a-zA-Z0-9]\z)/i)
+    email = params[:user][:email]
+    if (email_regex =~ email).nil? 
+      flash[:forgot_password_errors] << "Invalid email"
+      redirect_to(forgot_password_users_path)
+    else
+      @user = User.find_by_email(email)
+      if @user 
+        #reset pass and send:        
+        @user.password = random_password(8)
+        if @user.save
+          UserMailer.forgot_password_email(@user).deliver#send email
+          flash[:user_message] = 'Password was reset, please check your email.'
+          redirect_to(root_path) #good
+        else
+          flash[:forgot_password_errors] << "Can't save new password"
+          redirect_to(forgot_password_users_path)
+        end
+      else
+        flash[:forgot_password_errors] << "Can't find email in db"
+        redirect_to(forgot_password_users_path)
+      end
+    end
+  end
 
   def resend_email
     @user = User.find_by_id(session[:user_id])
@@ -123,9 +152,5 @@ class UsersController < ApplicationController
   def user_permits
     params.require(:user).permit(:full_name, :username, :password, :password_confirmation, :email)
   end
-
-  # def password_permits
-  #   params.permit(:old_password, :password, :password_confirmation)
-  # end
 
 end

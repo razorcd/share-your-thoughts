@@ -27,4 +27,14 @@ module CONTROLLER_HELPERS
     end
   end
 
+  #generates a strng of random chars
+  #n - size of random string
+  def random_password(n)  
+    accepted_chars = [*(0..9),*('a'..'z'),*('A'..'Z'),'_','-'].flatten
+    random_password = ''
+    # n.times { random_password += (rand(25)+97).chr }
+    n.times { random_password += accepted_chars[rand(accepted_chars.size-1)].to_s }
+    random_password
+  end
+
 end
