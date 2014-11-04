@@ -118,6 +118,27 @@
     %>
 
 
+    <%= form_tag({:action => "change_avatar"}, {:multipart => 'true'}) do %>
+      
+      <%= radio_button(:user, :use, :gravatar, { class: 'radio', checked: radio_gravatar}) %>
+      <%= label(:user, :use, "Use gravatar", :value => :gravatar) %>
+      <%= text_field(:user, :gravatar_email, :placeholder => "Gravatar email", :value => @current_user.gravatar_email) %>
+      <br />
+
+      <%= radio_button(:user, :use, :upload, { class: 'radio', checked: !radio_gravatar}) %>
+      <%= label(:user, :use, "Upload image", :value => :upload) %>
+
+      <%= file_field(:user, :avatar, {class: 'file_field'}) %>
+      <br />
+      <br />
+
+      <div class="submit-box">
+        <%= submit_tag('Set', :class => "submit_button") %>
+        <a class="default_button" href='<%= edit_user_path(@current_user.id) %>'> Reset to defaults </a>
+      </div>
+    <% end %>
+
+
     <div style="clear:both"></div>
   </div>
 <% end %>
