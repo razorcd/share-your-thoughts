@@ -95,3 +95,29 @@
 
 
 
+
+
+<!-- edit avatar form -->
+<% if @current_user %>
+  <div class="user_form" id="change_avatar">
+    <div class="form-title">Set your avatar</div>
+      <ul class="error-message">
+        <% if flash[:edit_avatar_errors] %>
+          <% flash[:edit_avatar_errors].each do |e| %>
+            <li><%= e %></li>
+          <% end %>
+        <% end %>
+    </ul>
+
+    <!-- radio_gravatar for checked radio buttons -->
+    <% if (@current_user.avatar && (@current_user.avatar.match"www.gravatar")) 
+      radio_gravatar = true 
+      else
+        radio_gravatar = false
+      end
+    %>
+
+
+    <div style="clear:both"></div>
+  </div>
+<% end %>
