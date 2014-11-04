@@ -123,6 +123,9 @@
 
     <%= form_tag({:action => "change_avatar"}, {:multipart => 'true'}) do %>
       
+      <%= radio_button(:user, :use, :gravatar, { class: 'radio', checked: radio_gravatar}) %>
+      <%= label(:user, :use, "Use gravatar", :value => :gravatar) %>
+      <%= text_field(:user, :gravatar_email, :placeholder => "Gravatar email", :value => @current_user.gravatar_email) %>
 
 
       <div class="submit-box">
