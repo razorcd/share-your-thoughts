@@ -109,9 +109,11 @@ a {
     float: right;
     span {
       position: relative;
-      top:-7px;
+      top:4px;
+      padding:6px;
     }
     input {
+      float:right;
       display: inline;
       box-shadow: none;
     }
