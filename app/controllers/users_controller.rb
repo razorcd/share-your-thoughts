@@ -99,9 +99,8 @@ class UsersController < ApplicationController
 
   def reset_forgot_password
     flash[:forgot_password_errors] = []
-    email_regex = Regexp.new(/\A[_a-zA-Z0-9]([\-+_%.a-zA-Z0-9]+)?@([_+\-%a-zA-Z0-9]+)(\.[a-zA-Z0-9]{0,6}){1,2}([a-zA-Z0-9]\z)/i)
     email = params[:user][:email]
-    if (email_regex =~ email).nil? 
+    if !is_valid_email(email) 
       flash[:forgot_password_errors] << "Invalid email"
       redirect_to(forgot_password_users_path)
     else
@@ -178,7 +177,7 @@ class UsersController < ApplicationController
     end
     if params[:user][:use] == "upload" && (params[:user][:avatar].original_filename.split('.').last.to_s == 'jpg')
       tempfile = params[:user][:avatar].tempfile
-      new_filename = params[:user][:avatar].original_filename
+      new_filename = session[:username]+"_full"+".jpg"
       newfile = File.join('avatars', new_filename)
       FileUtils.copy(tempfile, 'public/'+newfile)
       @user.avatar = '/'+newfile
@@ -195,7 +194,7 @@ class UsersController < ApplicationController
 
   def is_valid_email(e)
     email_regex = Regexp.new(/\A[_a-zA-Z0-9]([\-+_%.a-zA-Z0-9]+)?@([_+\-%a-zA-Z0-9]+)(\.[a-zA-Z0-9]{0,6}){1,2}([a-zA-Z0-9]\z)/i)
-    email_regex =~ e ? true :false
+    email_regex =~ e ? true : false
   end
 
   def user_permits
