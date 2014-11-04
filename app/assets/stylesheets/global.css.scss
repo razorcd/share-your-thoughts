@@ -76,29 +76,26 @@ a {
     width: 212px;
   }
 
-  input,textarea {
+  input:not(.file_field):not(.radio), textarea {
     color: $dark-grey-color;
     display: block;
     margin: 5px auto;
-    height: 25px;
+    /*height: 25px;*/
     border: 1px solid $light-grey-color;
     outline: none;
     padding: 5px;
-    background-color: #ffffff;
+    /*background-color: #ffffff;*/
     font-size: 12pt;
     border-radius: 5px;
     box-shadow: inset 0 0 2px $light-grey-color;
-
-    &:focus {
-      background-color: $very-light-blue-color;
-      box-shadow: inset 0 0 8px -4px $dark-grey-color;
-    }
+  }
+  input:not(.file_field):not(.radio):not(.submit_button):focus, textarea:focus {
+    background-color: $very-light-blue-color;
+    box-shadow: inset 0 0 8px -4px $dark-grey-color;
   }
 
   label {
     font-size: 75%;
-    margin-left: 14px;
-    margin-top: 5px;
   }
 
   textarea {
@@ -119,6 +116,17 @@ a {
     }
   }
 
+  .file_field {
+    width:210px;
+  }
+
+  .avatar_img {
+    display: block;
+    margin: 0 auto;
+    max-width: 200px;
+    max-height: 200px;
+  }
+
   .submit_button {
     float:right;
     clear:both;
@@ -126,6 +134,7 @@ a {
     padding: 0 10px;
     height:35px;
     color: $dark-grey-color;
+    background-color: #ffffff;
 
     &:hover {
       background-color: $light-blue-color;

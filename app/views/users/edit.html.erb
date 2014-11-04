@@ -45,7 +45,7 @@
 <% end %>
 
 
-<!-- edit details form -->
+<!-- edit Resend email confirmation form -->
 <% if @current_user %>
   <div class="user_form">
     <div class="form-title">Resend email confirmation</div>
@@ -84,7 +84,61 @@
       <%= password_field(:user, :password_confirmation, :placeholder => "confirm new  password") %>
       <div class="submit-box">
         <%= submit_tag('Reset', :class => "submit_button") %>
-        <!-- <a class="default_button" href='<%= edit_user_path(@current_user.id) %>'> Reset to defaults </a> -->
+        <a class="default_button" href='<%= edit_user_path(@current_user.id) %>'> Reset to defaults </a>
+      </div>
+    <% end %>
+
+
+    <div style="clear:both"></div>
+  </div>
+<% end %>
+
+
+
+
+
+<!-- edit avatar form -->
+
+
+
+<% if @current_user %>
+  <div class="user_form" id="change_avatar">
+    <div class="form-title">Set your avatar</div>
+      <ul class="error-message">
+        <% if flash[:edit_avatar_errors] %>
+          <% flash[:edit_avatar_errors].each do |e| %>
+            <li><%= e %></li>
+          <% end %>
+        <% end %>
+    </ul>
+
+    <!-- radio_gravatar for checked radio buttons -->
+    <% if (@current_user.avatar && (@current_user.avatar.match"www.gravatar")) 
+      radio_gravatar = true 
+      else
+        radio_gravatar = false
+      end
+    %>
+
+    <% if @current_user.avatar %> <img class="avatar_img" src="<%= @current_user.avatar %>?s=140 ">    <% end %>
+
+    <%= form_tag({:action => "change_avatar"}, {:multipart => 'true'}) do %>
+      
+      <%= radio_button(:user, :use, :gravatar, { class: 'radio', checked: radio_gravatar}) %>
+      <%= label(:user, :use, "Use gravatar", :value => :gravatar) %>
+      <%= text_field(:user, :gravatar_email, :placeholder => "Gravatar email", :value => @current_user.gravatar_email) %>
+      <br />
+
+      <%= radio_button(:user, :use, :upload, { class: 'radio', checked: !radio_gravatar}) %>
+      <%= label(:user, :use, "Upload image", :value => :upload) %>
+
+      <%= file_field(:user, :avatar, {class: 'file_field'}) %>
+      <br />
+      <br />
+
+      <div class="submit-box">
+        <%= submit_tag('Set', :class => "submit_button") %>
+        <a class="default_button" href='<%= edit_user_path(@current_user.id) %>'> Reset to defaults </a>
       </div>
     <% end %>
 

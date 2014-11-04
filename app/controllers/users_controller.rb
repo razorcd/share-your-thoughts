@@ -1,3 +1,6 @@
+require 'digest/md5'
+require 'fileutils'
+
 class UsersController < ApplicationController
   before_action :check_login, :except => [:new, :create, :login, :index, :confirm_email, :forgot_password, :reset_forgot_password]
 
@@ -144,13 +147,60 @@ class UsersController < ApplicationController
   end
 
 
+  def change_avatar
+    puts "\n\n\n\n\n"
+    puts params.inspect
+    puts "\n\n\n\n\n"
+
+
+    #validations
+    if params[:user][:use] == "gravatar" && !is_valid_email(params[:user][:gravatar_email]) 
+      flash[:edit_avatar_errors] = ["Gravatar email not valid"]
+      redirect_to edit_user_path(session[:user_id])
+      return
+    end
+    if params[:user][:use] == "upload" && !params[:user][:avatar]
+      flash[:edit_avatar_errors] = ["Please upload a file"]
+      redirect_to edit_user_path(session[:user_id])
+      return
+    end
+    if params[:user][:use] == "upload" && !(params[:user][:avatar].original_filename.split('.').last.to_s == 'jpg')
+      flash[:edit_avatar_errors] = ["Avatar image must be a .jpg"]
+      redirect_to edit_user_path(session[:user_id])
+      return
+    end
+
+    @user = User.find_by_id(session[:user_id])
+    if params[:user][:use] == "gravatar" && is_valid_email(params[:user][:gravatar_email])
+      @user.gravatar_email = params[:user][:gravatar_email]
+      @user.avatar = 'http://www.gravatar.com/avatar/' + Digest::MD5.hexdigest(params[:user][:gravatar_email])
+      @user.save
+    end
+    if params[:user][:use] == "upload" && (params[:user][:avatar].original_filename.split('.').last.to_s == 'jpg')
+      tempfile = params[:user][:avatar].tempfile
+      new_filename = params[:user][:avatar].original_filename
+      newfile = File.join('avatars', new_filename)
+      FileUtils.copy(tempfile, 'public/'+newfile)
+      @user.avatar = '/'+newfile
+      @user.save
+    end
+
+    redirect_to edit_user_path(session[:user_id])
+  end
+
 
   private
 
   include CONTROLLER_HELPERS
+
+  def is_valid_email(e)
+    email_regex = Regexp.new(/\A[_a-zA-Z0-9]([\-+_%.a-zA-Z0-9]+)?@([_+\-%a-zA-Z0-9]+)(\.[a-zA-Z0-9]{0,6}){1,2}([a-zA-Z0-9]\z)/i)
+    email_regex =~ e ? true :false
+  end
 
   def user_permits
     params.require(:user).permit(:full_name, :username, :password, :password_confirmation, :email)
   end
 
 end
+

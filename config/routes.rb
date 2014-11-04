@@ -12,8 +12,10 @@ Rails.application.routes.draw do
       get 'confirm_email/:id' => 'users#confirm_email'
       get 'resend_email' => 'users#resend_email'
       post 'change_password' => 'users#change_password'
+      post 'change_avatar' => 'users#change_avatar'
       get  'forgot_password' => 'users#forgot_password'
       post 'forgot_password' => 'users#reset_forgot_password'
+
     end
 
     resources :thoughts
