@@ -1,0 +1,359 @@
+/* line 3, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+body, header, footer, .content {
+  display: block;
+  margin: 0;
+  padding: 0;
+  font-family: "Arial", "sans-serif";
+  background-color: #f0f0f0;
+  color: #727272;
+}
+
+/* line 12, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+body {
+  max-width: 1000px;
+  min-width: 900px;
+  margin: 0 auto;
+  background: url("../images/bg.jpg");
+}
+
+/* line 19, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+a {
+  color: #727272;
+}
+/* line 30, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/_constants.scss */
+a:hover {
+  color: #70d8f5;
+}
+
+/* line 23, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.bar {
+  height: 5px;
+}
+
+/* line 27, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.message {
+  background-color: #ffffff;
+  height: 18px;
+  margin: 5px 20px 20px 20px;
+  padding: 5px 15px;
+}
+
+/* line 34, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.content {
+  min-height: 800px;
+  padding: 0 30px 20px 30px;
+  /*background-color: #FFFFFF;*/
+  /* Note: This gradient may render differently in browsers that don't support the unprefixed gradient syntax */
+  /* IE10 Consumer Preview */
+  background-image: -ms-linear-gradient(bottom right, white 0%, #00a3ef 100%);
+  /* Mozilla Firefox */
+  background-image: -moz-linear-gradient(bottom right, white 0%, #00a3ef 100%);
+  /* Opera */
+  background-image: -o-linear-gradient(bottom right, white 0%, #00a3ef 100%);
+  /* Webkit (Safari/Chrome 10) */
+  background-image: -webkit-gradient(linear, right bottom, left top, color-stop(0, white), color-stop(1, #00a3ef));
+  /* Webkit (Chrome 11+) */
+  background-image: -webkit-linear-gradient(bottom right, white 0%, #00a3ef 100%);
+  /* W3C Markup, IE10 Release Preview */
+  background-image: linear-gradient(to top left, white 0%, #00a3ef 100%);
+}
+
+/*form*/
+/* line 43, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.register_form, .login_form, .thought_form, .user_form {
+  display: block;
+  border: 1px solid #f0f0f0;
+  width: 230px;
+  /*margin: 10px auto;*/
+  margin: 10px;
+  float: right;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 2px 2px 15px #727272;
+}
+/* line 54, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.register_form .form-title, .login_form .form-title, .thought_form .form-title, .user_form .form-title {
+  height: 20px;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 10px;
+}
+/* line 60, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.register_form .error-message, .login_form .error-message, .thought_form .error-message, .user_form .error-message {
+  color: red;
+  font-size: smaller;
+  padding-left: 5px;
+  margin: 10px 10px;
+  list-style-type: none;
+}
+/* line 66, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.register_form .error-message li, .login_form .error-message li, .thought_form .error-message li, .user_form .error-message li {
+  margin: 5px 0;
+}
+/* line 71, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.register_form form, .login_form form, .thought_form form, .user_form form {
+  padding: 5px;
+}
+/* line 75, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.register_form .submit-box, .login_form .submit-box, .thought_form .submit-box, .user_form .submit-box {
+  height: 46px;
+  width: 212px;
+}
+/* line 80, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.register_form input:not(.file_field):not(.radio), .register_form textarea, .login_form input:not(.file_field):not(.radio), .login_form textarea, .thought_form input:not(.file_field):not(.radio), .thought_form textarea, .user_form input:not(.file_field):not(.radio), .user_form textarea {
+  color: #727272;
+  display: block;
+  margin: 5px auto;
+  /*height: 25px;*/
+  border: 1px solid #f0f0f0;
+  outline: none;
+  padding: 5px;
+  /*background-color: #ffffff;*/
+  font-size: 12pt;
+  border-radius: 5px;
+  box-shadow: inset 0 0 2px #f0f0f0;
+}
+/* line 93, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.register_form input:not(.file_field):not(.radio):not(.submit_button):focus, .register_form textarea:focus, .login_form input:not(.file_field):not(.radio):not(.submit_button):focus, .login_form textarea:focus, .thought_form input:not(.file_field):not(.radio):not(.submit_button):focus, .thought_form textarea:focus, .user_form input:not(.file_field):not(.radio):not(.submit_button):focus, .user_form textarea:focus {
+  background-color: #bff2ff;
+  box-shadow: inset 0 0 8px -4px #727272;
+}
+/* line 98, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.register_form label, .login_form label, .thought_form label, .user_form label {
+  font-size: 75%;
+}
+/* line 102, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.register_form textarea, .login_form textarea, .thought_form textarea, .user_form textarea {
+  height: 250px;
+  max-width: 197px;
+}
+/* line 107, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.register_form .checkbox, .login_form .checkbox, .thought_form .checkbox, .user_form .checkbox {
+  margin: 0px 20px;
+  float: right;
+}
+/* line 110, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.register_form .checkbox span, .login_form .checkbox span, .thought_form .checkbox span, .user_form .checkbox span {
+  position: relative;
+  top: -7px;
+}
+/* line 114, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.register_form .checkbox input, .login_form .checkbox input, .thought_form .checkbox input, .user_form .checkbox input {
+  display: inline;
+  box-shadow: none;
+}
+/* line 120, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.register_form .file_field, .login_form .file_field, .thought_form .file_field, .user_form .file_field {
+  width: 210px;
+}
+/* line 124, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.register_form .avatar_img, .login_form .avatar_img, .thought_form .avatar_img, .user_form .avatar_img {
+  display: block;
+  margin: 0 auto;
+  max-width: 200px;
+  max-height: 200px;
+}
+/* line 131, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.register_form .submit_button, .login_form .submit_button, .thought_form .submit_button, .user_form .submit_button {
+  float: right;
+  clear: both;
+  margin-bottom: 12px;
+  padding: 0 10px;
+  height: 35px;
+  color: #727272;
+  background-color: #ffffff;
+}
+/* line 140, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.register_form .submit_button:hover, .login_form .submit_button:hover, .thought_form .submit_button:hover, .user_form .submit_button:hover {
+  background-color: #70d8f5;
+  color: #ffffff;
+  cursor: pointer;
+}
+/* line 147, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.register_form .default_button, .login_form .default_button, .thought_form .default_button, .user_form .default_button {
+  color: #727272;
+  font-size: 80%;
+  margin-left: 12px;
+  position: relative;
+  top: 10px;
+}
+/* line 30, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/_constants.scss */
+.register_form .default_button:hover, .login_form .default_button:hover, .thought_form .default_button:hover, .user_form .default_button:hover {
+  color: #70d8f5;
+}
+
+/* line 157, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.submitlike_button {
+  display: block;
+  margin: 8px 0;
+  padding: 8px;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  width: 75px;
+  text-decoration: none;
+  text-align: center;
+}
+/* line 167, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.submitlike_button:hover {
+  background-color: #70d8f5;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/* line 174, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.mid {
+  margin: 8px auto;
+}
+
+/* line 178, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.left {
+  float: left;
+  margin: 8px;
+}
+
+/* line 183, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.right {
+  float: right;
+  margin: 8px;
+}
+
+/* line 188, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.thought_form {
+  float: right;
+}
+
+/* line 192, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.thoughts_list, .users_list {
+  float: left;
+  display: block;
+  border: 1px solid #f0f0f0;
+  width: 600px;
+  min-height: 50px;
+  margin: 10px auto;
+  padding-bottom: 10px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 2px 2px 15px #727272;
+  /*  .thought-item:nth-last-child(1) {
+      margin-bottom: 10px;
+    }*/
+}
+/* line 204, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.thoughts_list .main-title, .users_list .main-title {
+  height: 10px;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 15px;
+}
+/* line 210, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.thoughts_list .thought-item:not(:nth-last-child(1)), .users_list .thought-item:not(:nth-last-child(1)) {
+  border-bottom: 1px solid #f0f0f0;
+}
+/* line 217, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.thoughts_list .thought-item, .users_list .thought-item {
+  padding: 15px;
+}
+/* line 220, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.thoughts_list .thought-item .title, .users_list .thought-item .title {
+  font-weight: bold;
+  font-size: 14pt;
+  margin: 10px;
+}
+/* line 225, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.thoughts_list .thought-item .body, .users_list .thought-item .body {
+  margin: 10px;
+}
+/* line 228, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.thoughts_list .thought-item .name-time, .users_list .thought-item .name-time {
+  float: right;
+  font-size: 10pt;
+}
+/* line 232, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.thoughts_list .thought-item .follow, .users_list .thought-item .follow {
+  float: left;
+  font-size: 10pt;
+  margin: 5px 8px;
+}
+/* line 238, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/global.css.scss */
+.thoughts_list .thought-item .follow_but, .users_list .thought-item .follow_but {
+  font-weight: bold;
+  float: left;
+  font-size: 10pt;
+  margin: 5px 8px;
+}
+/* line 3, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/footer.css.scss */
+.footer {
+  height: 150px;
+  background-color: #f0f0f0;
+}
+/* line 3, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/header.css.scss */
+.header {
+  display: block;
+  background-color: #f0f0f0;
+  height: 60px;
+}
+/* line 8, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/header.css.scss */
+.header .title {
+  /*display: block;*/
+  float: left;
+  font-size: 22pt;
+  color: #727272;
+  padding: 12px;
+  font-weight: bold;
+  width: 300px;
+  text-decoration: none;
+}
+/* line 18, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/header.css.scss */
+.header nav {
+  float: left;
+  margin-top: 28px;
+}
+/* line 22, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/header.css.scss */
+.header nav a {
+  margin: 10px;
+  color: #727272;
+}
+/* line 30, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/_constants.scss */
+.header nav a:hover {
+  color: #70d8f5;
+}
+/* line 28, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/header.css.scss */
+.header .user-info {
+  float: right;
+  margin: 10px;
+  margin-top: 30px;
+}
+/* line 33, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/header.css.scss */
+.header .user-info span {
+  margin: 5px;
+}
+/* line 36, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/header.css.scss */
+.header .user-info .username {
+  color: #727272;
+  font-weight: bold;
+}
+/* line 41, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/header.css.scss */
+.header .user-info .header-but {
+  text-decoration: none;
+  margin: 0 10px;
+  color: #727272;
+}
+/* line 45, D:/PERSONAL7/ProjectsS/_RUBY/twitter-clone2/app/assets/stylesheets/header.css.scss */
+.header .user-info .header-but:hover {
+  color: #70d8f5;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+
+
+
+
+ */
+
