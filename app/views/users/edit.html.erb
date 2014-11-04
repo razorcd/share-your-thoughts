@@ -64,6 +64,7 @@
 
 
 
+
 <!-- edit password form -->
 <% if @current_user %>
   <div class="user_form" id="change_password">
@@ -125,7 +126,14 @@
       <%= radio_button(:user, :use, :gravatar, { class: 'radio', checked: radio_gravatar}) %>
       <%= label(:user, :use, "Use gravatar", :value => :gravatar) %>
       <%= text_field(:user, :gravatar_email, :placeholder => "Gravatar email", :value => @current_user.gravatar_email) %>
+      <br />
 
+      <%= radio_button(:user, :use, :upload, { class: 'radio', checked: !radio_gravatar}) %>
+      <%= label(:user, :use, "Upload image", :value => :upload) %>
+
+      <%= file_field(:user, :avatar, {class: 'file_field'}) %>
+      <br />
+      <br />
 
       <div class="submit-box">
         <%= submit_tag('Set', :class => "submit_button") %>
