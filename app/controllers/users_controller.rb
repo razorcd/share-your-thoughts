@@ -1,5 +1,6 @@
 require 'digest/md5'
 require 'fileutils'
+require 'rmagick'
 
 class UsersController < ApplicationController
   before_action :check_login, :except => [:new, :create, :login, :index, :confirm_email, :forgot_password, :reset_forgot_password]
@@ -169,6 +170,7 @@ class UsersController < ApplicationController
       return
     end
 
+    #execute
     @user = User.find_by_id(session[:user_id])
     if params[:user][:use] == "gravatar" && is_valid_email(params[:user][:gravatar_email])
       @user.gravatar_email = params[:user][:gravatar_email]
@@ -182,6 +184,16 @@ class UsersController < ApplicationController
       FileUtils.copy(tempfile, 'public/'+newfile)
       @user.avatar = '/'+newfile
       @user.save
+
+      #make thumbs with rmagick
+      # i = Imagelist.new('./public'+@user.avatar)
+      i = Magick::Image.read( File.join('.', 'public', @user.avatar) ).first
+      i100 = i.resize_to_fill(100, 100, Magick::CenterGravity)
+      i100.write( File.join('.', 'public', 'avatars', @user.username+'_100x.jpg') )
+      i15 = i.resize_to_fill(15, 15, Magick::CenterGravity)
+      i15.write( File.join('.', 'public', 'avatars', @user.username+'_15x.jpg') )
+      
+
     end
 
     redirect_to edit_user_path(session[:user_id])
