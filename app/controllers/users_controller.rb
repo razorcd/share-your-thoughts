@@ -185,13 +185,13 @@ class UsersController < ApplicationController
       @user.avatar = '/'+newfile
       @user.save
 
-      #make thumbs with rmagick
-      # i = Imagelist.new('./public'+@user.avatar)
-      i = Magick::Image.read( File.join('.', 'public', @user.avatar) ).first
-      i100 = i.resize_to_fill(100, 100, Magick::CenterGravity)
-      i100.write( File.join('.', 'public', 'avatars', @user.username+'_100x.jpg') )
-      i15 = i.resize_to_fill(15, 15, Magick::CenterGravity)
-      i15.write( File.join('.', 'public', 'avatars', @user.username+'_15x.jpg') )
+      # #make thumbs with rmagick
+      # # i = Imagelist.new('./public'+@user.avatar)
+      # i = Magick::Image.read( File.join('.', 'public', @user.avatar) ).first
+      # i100 = i.resize_to_fill(100, 100, Magick::CenterGravity)
+      # i100.write( File.join('.', 'public', 'avatars', @user.username+'_100x.jpg') )
+      # i15 = i.resize_to_fill(15, 15, Magick::CenterGravity)
+      # i15.write( File.join('.', 'public', 'avatars', @user.username+'_15x.jpg') )
       
 
     end
